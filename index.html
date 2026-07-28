@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>集美大学 · 校区周边吃喝玩乐终极指南</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+<title>集美大学 · 周边吃喝玩乐终极指南 | 100+美食/景点/商圈全覆盖</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;color:#333;overflow-x:hidden}
-
-/* Hero */
 .hero{position:relative;height:100vh;min-height:700px;background:linear-gradient(135deg,#1a3a5c 0%,#0d2137 30%,#1a5c3a 70%,#0d3721 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('images/shilichangdi.png') center/cover;opacity:0.3;animation:heroZoom 20s infinite alternate}
 @keyframes heroZoom{0%{transform:scale(1)}100%{transform:scale(1.1)}}
@@ -25,585 +22,350 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;c
 .scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;color:#fff;opacity:0.7;font-size:13px;cursor:pointer}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
 
+/* CTA Banner */
+.cta-banner{background:linear-gradient(135deg,#ff6b35,#ff8c42,#ff6b35);color:#fff;padding:14px 20px;text-align:center;font-size:15px;font-weight:600;letter-spacing:1px;position:relative;overflow:hidden}
+.cta-banner::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shimmer 3s infinite}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+.cta-banner .wx{border:1.5px dashed #fff;padding:4px 12px;border-radius:6px;display:inline-block;margin:0 6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{border-color:#fff}50%{border-color:rgba(255,255,255,0.4)}}
+
 /* Nav */
-.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid #e8e0d5;padding:0 20px;transition:box-shadow 0.3s}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid #e8e0d5;padding:0 20px;transition:box-shadow 0.3s}
 .nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08)}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
-.nav-logo{font-size:18px;font-weight:700;color:#1a3a5c;white-space:nowrap}
-.nav-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.nav-links a{text-decoration:none;color:#666;font-size:13px;padding:6px 14px;border-radius:20px;transition:all 0.3s}
+.nav-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;height:56px;gap:12px}
+.nav-logo{font-size:18px;font-weight:700;color:#1a3a5c;white-space:nowrap;flex-shrink:0}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.nav-links a{text-decoration:none;color:#666;font-size:12px;padding:5px 10px;border-radius:16px;transition:all 0.3s;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active{background:#1a3a5c;color:#fff}
 
+/* Search */
+.search-wrap{flex:1;max-width:360px;position:relative;margin:0 8px}
+.search-wrap input{width:100%;padding:8px 36px 8px 36px;border:1.5px solid #d0c8b8;border-radius:20px;font-size:13px;outline:none;background:#faf8f5;transition:all 0.3s}
+.search-wrap input:focus{border-color:#1a3a5c;box-shadow:0 0 0 3px rgba(26,58,92,0.1)}
+.search-wrap .sicon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:#999;pointer-events:none}
+.search-results{position:absolute;top:110%;left:0;right:0;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.15);max-height:400px;overflow-y:auto;display:none;z-index:200}
+.search-results.show{display:block}
+.search-results .sr-item{padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #f0ece5;transition:background 0.2s}
+.search-results .sr-item:hover{background:#f5f0e8}
+.search-results .sr-item:last-child{border-bottom:none}
+.sr-emoji{font-size:20px;flex-shrink:0}
+.sr-info{flex:1;min-width:0}
+.sr-name{font-weight:600;font-size:14px;color:#333}
+.sr-detail{font-size:11px;color:#999;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-price{font-size:13px;color:#e8652e;font-weight:700;flex-shrink:0}
+.no-results{padding:20px;text-align:center;color:#999;font-size:14px}
+
 /* Section */
-.section{padding:60px 20px;max-width:1200px;margin:0 auto}
+.section{padding:60px 20px;max-width:1300px;margin:0 auto}
 .section-title{text-align:center;margin-bottom:40px}
 .section-title h2{font-size:clamp(24px,3vw,36px);color:#1a3a5c;margin-bottom:8px}
 .section-title p{color:#888;font-size:15px}
 
 /* Map */
-.map-container{background:#fff;border-radius:24px;box-shadow:0 4px 30px rgba(0,0,0,0.06);padding:40px;position:relative;overflow:hidden}
-.map-bg{width:100%;max-width:900px;margin:0 auto;position:relative;aspect-ratio:1.6;background:linear-gradient(180deg,#e8f4e8 0%,#d4e8d4 40%,#c8dce8 40%,#a8c8d8 70%,#f0e8d0 70%,#e8d8c0 100%);border-radius:16px;overflow:hidden}
+.map-container{background:#fff;border-radius:24px;box-shadow:0 4px 30px rgba(0,0,0,0.06);padding:30px 20px;position:relative;overflow:hidden}
+.map-bg{width:100%;max-width:960px;margin:0 auto;position:relative;aspect-ratio:1.55;background:linear-gradient(180deg,#e8f4e8 0%,#d4e8d4 35%,#c8dce8 35%,#a8c8d8 65%,#f0e8d0 65%,#e8d8c0 100%);border-radius:16px;overflow:hidden}
 .water{position:absolute;background:rgba(100,160,200,0.2);border-radius:8px}
-.water.xinglin{left:50%;top:20%;width:35%;height:25%;border-radius:30% 40% 20% 35%}
-.water.longzhou{right:15%;bottom:25%;width:18%;height:10%;border-radius:30% 20% 40% 30%}
-.road{position:absolute;background:rgba(255,255,255,0.7);border:1px dashed rgba(0,0,0,0.15)}
-.road.sg{left:50%;top:0;width:3px;height:100%;transform:translateX(-50%)}
-.road.yd{top:55%;left:0;width:100%;height:3px}
-.map-label{position:absolute;font-size:10px;color:#999;font-weight:600}
-.marker{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:10;transition:transform 0.3s}
-.marker:hover{transform:translate(-50%,-50%) scale(1.2)}
-.marker-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;box-shadow:0 3px 12px rgba(0,0,0,0.2);position:relative}
-.marker-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid transparent;animation:pulse 2s infinite}
-@keyframes pulse{0%{border-color:rgba(26,58,92,0.4);transform:scale(1)}100%{border-color:rgba(26,58,92,0);transform:scale(1.4)}}
-.marker-name{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;white-space:nowrap;margin-top:4px;color:#333;text-shadow:0 0 8px rgba(255,255,255,0.8)}
-.map-legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#666}
-.legend-dot{width:10px;height:10px;border-radius:50%}
+.water.xinglin{left:50%;top:18%;width:35%;height:25%;border-radius:30% 40% 20% 35%}
+.water.longzhou{right:15%;bottom:22%;width:18%;height:10%;border-radius:30% 20% 40% 30%}
+.road{position:absolute;background:rgba(255,255,255,0.7);border:1px dashed rgba(0,0,0,0.12)}
+.campus-marker{position:absolute;transform:translate(-50%,-50%);cursor:pointer;transition:all 0.3s;z-index:10}
+.campus-marker:hover{transform:translate(-50%,-50%) scale(1.15)}
+.campus-marker .dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);animation:pulse2 2s infinite;color:#fff}
+.campus-marker .label{position:absolute;top:50%;left:52px;transform:translateY(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:4px 10px;border-radius:12px;font-size:11px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.3s}
+.campus-marker:hover .label{opacity:1}
+@keyframes pulse2{0%,100%{box-shadow:0 4px 15px rgba(0,0,0,0.2)}50%{box-shadow:0 4px 25px rgba(0,0,0,0.4)}}
 
 /* Modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s}
-.modal-overlay.active{opacity:1;pointer-events:auto}
-.modal{background:#fff;border-radius:20px;width:90vw;max-width:900px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.2);transform:translateY(20px);transition:transform 0.3s}
-.modal-overlay.active .modal{transform:translateY(0)}
-.modal-header{background:linear-gradient(135deg,#1a3a5c,#1a5c3a);color:#fff;padding:20px 24px;position:relative}
-.modal-header h3{font-size:22px;margin-bottom:4px}
-.modal-header .sub{font-size:13px;opacity:0.8}
-.modal-close{position:absolute;right:16px;top:16px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s}
-.modal-close:hover{background:rgba(255,255,255,0.3)}
-.modal-tabs{display:flex;border-bottom:1px solid #eee;padding:0 16px;overflow-x:auto;gap:0}
-.modal-tab{padding:12px 16px;border:none;background:none;cursor:pointer;font-size:14px;color:#888;border-bottom:2px solid transparent;transition:all 0.3s;white-space:nowrap;font-family:inherit}
-.modal-tab:hover,.modal-tab.active{color:#1a5c3a;border-bottom-color:#1a5c3a}
-.modal-body{flex:1;overflow-y:auto;padding:20px}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:20px;max-width:900px;width:100%;max-height:85vh;overflow-y:auto;position:relative;animation:slideUp 0.3s}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{position:sticky;top:0;background:#1a3a5c;color:#fff;padding:18px 24px;border-radius:20px 20px 0 0;display:flex;align-items:center;justify-content:space-between;z-index:10}
+.modal-header h3{font-size:22px}
+.modal-close{background:none;border:none;color:#fff;font-size:28px;cursor:pointer;padding:4px 8px;border-radius:8px;transition:background 0.2s}
+.modal-close:hover{background:rgba(255,255,255,0.15)}
+.modal-tabs{display:flex;gap:4px;padding:12px 24px;border-bottom:1px solid #e8e0d5;background:#faf8f5;flex-wrap:wrap}
+.modal-tab{padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-size:13px;background:transparent;color:#666;transition:all 0.2s;white-space:nowrap}
+.modal-tab.active{background:#1a3a5c;color:#fff}
+.modal-body{padding:24px}
+.modal-body .tab-content{display:none}
+.modal-body .tab-content.active{display:block}
 
-/* Food Cards */
+/* Food cards */
 .food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.food-card{background:#fafaf7;border-radius:14px;overflow:hidden;border:1px solid #eee;transition:all 0.3s;display:flex;flex-direction:column}
-.food-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.1);border-color:#1a5c3a}
-.food-card-img{width:100%;height:180px;object-fit:cover;background:#e8e0d5}
-.food-card-body{padding:14px;flex:1;display:flex;flex-direction:column}
-.food-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
-.food-card h4{font-size:16px;color:#1a3a5c}
-.food-card .price{color:#e85d3a;font-weight:700;font-size:15px;white-space:nowrap}
-.food-card .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;font-size:12px;color:#999}
-.food-card .meta span{display:flex;align-items:center;gap:3px}
-.food-card .rating{color:#ff9500;font-weight:600}
-.food-card .addr{font-size:12px;color:#aaa;margin-bottom:8px}
-.food-card .review{font-size:13px;color:#666;line-height:1.6;flex:1;position:relative;padding-left:12px;border-left:3px solid #e8e0d0}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
-.badge.hot{background:#fff0e8;color:#e85d3a}
-.badge.rec{background:#e8f5e8;color:#1a5c3a}
-.badge.new{background:#e8f0ff;color:#3a6fb5}
+.food-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e8e0d5;transition:all 0.3s;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+.food-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.1)}
+.food-card-img{width:100%;height:180px;object-fit:cover;background:#f0e8d8}
+.food-card-body{padding:14px}
+.food-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.food-card-top h4{font-size:15px;color:#1a3a5c;flex:1;margin-right:8px}
+.price{color:#e8652e;font-weight:700;font-size:14px;white-space:nowrap}
+.meta{display:flex;gap:10px;margin-bottom:6px;font-size:12px;color:#888}
+.addr{font-size:11px;color:#aaa;margin-bottom:8px}
+.review{font-size:12px;color:#555;line-height:1.6;font-style:italic;background:#faf8f5;padding:8px;border-radius:8px}
+.tags{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.tag{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.tag.hot{background:#fee2e2;color:#dc2626}
+.tag.rec{background:#dbeafe;color:#2563eb}
+.tag.new{background:#fef3c7;color:#d97706}
 
 /* Attraction cards */
-.attr-card{display:flex;gap:16px;background:#fafaf7;border-radius:14px;padding:16px;border:1px solid #eee;margin-bottom:12px;align-items:flex-start}
-.attr-card img{width:160px;height:120px;object-fit:cover;border-radius:10px;flex-shrink:0}
-.attr-info h4{font-size:16px;color:#1a3a5c;margin-bottom:4px}
-.attr-info .price{font-size:13px;color:#e85d3a;margin-bottom:6px}
-.attr-info p{font-size:14px;color:#666;line-height:1.6}
+.attraction-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.attraction-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e0d8c8;transition:all 0.3s}
+.attraction-card:hover{transform:translateY(-3px)}
+.attraction-card-img{width:100%;height:160px;object-fit:cover;background:#e8e0d0}
+.attraction-card-body{padding:14px}
+.attraction-card-body h4{font-size:15px;color:#1a5c3a;margin-bottom:6px}
+.attraction-card-body .desc{font-size:12px;color:#666;line-height:1.6}
+
+/* Shopping */
+.shop-list{display:flex;flex-direction:column;gap:12px}
+.shop-item{background:#faf8f5;padding:14px;border-radius:12px;border-left:3px solid #1a3a5c}
+.shop-item h5{font-size:14px;color:#1a3a5c;margin-bottom:4px}
+.shop-item p{font-size:12px;color:#888}
+
+/* Transport */
+.transport-box{background:#f0f7f0;padding:16px;border-radius:12px;border:1px solid #c8dcc8}
+.transport-box p{font-size:14px;color:#555;line-height:1.8}
+
+/* TOP10 */
+.top10-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+
+/* AI Disclaimer */
+.ai-disclaimer{background:linear-gradient(135deg,#fef9e7,#fdf2d0);border:1.5px dashed #e8c84a;border-radius:12px;padding:12px 16px;margin:16px 0;display:flex;align-items:center;gap:10px;font-size:12px;color:#8b6914;line-height:1.6}
+.ai-disclaimer .ai-icon{font-size:24px;flex-shrink:0}
 
 /* Route */
-.route-item{background:linear-gradient(135deg,#fafaf7,#f0ede5);border-radius:14px;padding:16px;border-left:4px solid #1a5c3a;margin-bottom:12px}
-.route-item .time{font-size:13px;color:#1a5c3a;font-weight:700;margin-bottom:4px}
-.route-item h4{font-size:16px;color:#1a3a5c;margin-bottom:4px}
-.route-item p{font-size:13px;color:#666}
+.route-list{display:flex;flex-direction:column;gap:14px}
+.route-step{display:flex;gap:16px;align-items:flex-start}
+.route-time{background:#1a3a5c;color:#fff;padding:4px 12px;border-radius:14px;font-size:12px;white-space:nowrap;font-weight:600;flex-shrink:0}
+.route-desc{font-size:14px;color:#555;line-height:1.6}
 
-/* Buttons */
-.btn{display:inline-block;padding:12px 28px;border-radius:25px;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none;border:none;font-family:inherit}
-.btn-primary{background:linear-gradient(135deg,#1a3a5c,#1a5c3a);color:#fff}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,58,92,0.3)}
-.btn-outline{background:transparent;border:2px solid #1a3a5c;color:#1a3a5c}
-.btn-outline:hover{background:#1a3a5c;color:#fff}
+/* Sticky footer */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;background:#e8652e;color:#fff;padding:12px 20px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:12px;z-index:300;letter-spacing:1px}
+.sticky-cta .close-cta{background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;flex-shrink:0}
 
-/* Campus buttons grid */
-.campus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:30px}
-.campus-btn{padding:14px 10px;border-radius:14px;border:2px solid #e8e0d5;background:#fff;cursor:pointer;transition:all 0.3s;text-align:center;font-size:14px;font-weight:600;color:#333;font-family:inherit}
-.campus-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.08)}
-.campus-btn .icon{display:block;font-size:28px;margin-bottom:6px}
-.campus-btn.selected{background:#1a3a5c;color:#fff;border-color:#1a3a5c}
-
-/* Mobile */
-@media(max-width:768px){
-  .hero{min-height:500px}
-  .map-bg{aspect-ratio:1.2}
-  .marker-dot{width:28px;height:28px;font-size:11px}
-  .food-grid{grid-template-columns:1fr}
-  .attr-card{flex-direction:column}
-  .attr-card img{width:100%;height:160px}
-  .modal{width:96vw;max-height:92vh;border-radius:14px}
-  .campus-grid{grid-template-columns:repeat(3,1fr)}
-}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
-
-.back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:#1a3a5c;color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:50;opacity:0;pointer-events:none;transition:all 0.3s}
+/* Back to top */
+.back-top{position:fixed;bottom:60px;right:30px;width:44px;height:44px;border-radius:50%;background:#1a3a5c;color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:50;opacity:0;pointer-events:none;transition:all 0.3s}
 .back-top.show{opacity:1;pointer-events:auto}
 
-/* AI disclaimer */
-.ai-disclaimer{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff8e7,#fef3e0);border:1px dashed #e8c87a;border-radius:12px;padding:12px 16px;margin-top:16px;font-size:13px;color:#b8860b;line-height:1.7}
-.ai-disclaimer .icon{font-size:24px;flex-shrink:0}
-.ai-disclaimer strong{color:#d48806}
+/* Buttons */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+.btn-campus{padding:10px 20px;border-radius:20px;border:none;cursor:pointer;font-size:13px;font-weight:600;color:#fff;transition:all 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.btn-campus:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2)}
 
-/* Xiaoqi CTA */
-.xiaoqi-cta{position:relative;text-align:center;padding:22px 20px;background:linear-gradient(135deg,#ff6b6b,#ff8e53,#ff6b6b);background-size:200% 200%;animation:ctaShine 3s ease infinite;color:#fff;border-radius:0;margin-bottom:0}
-@keyframes ctaShine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.xiaoqi-cta .cta-text{font-size:clamp(16px,2.5vw,20px);font-weight:700;letter-spacing:1px;text-shadow:0 2px 8px rgba(0,0,0,0.15)}
-.xiaoqi-cta .cta-wechat{display:inline-block;background:rgba(255,255,255,0.25);backdrop-filter:blur(8px);padding:8px 22px;border-radius:25px;font-size:clamp(14px,2vw,18px);font-weight:900;margin:8px 0 0;letter-spacing:2px;border:2px dashed rgba(255,255,255,0.5);animation:pulse-border 2s infinite}
-@keyframes pulse-border{0%,100%{border-color:rgba(255,255,255,0.5);box-shadow:0 0 0 0 rgba(255,255,255,0.3)}50%{border-color:rgba(255,255,255,0.9);box-shadow:0 0 0 12px rgba(255,255,255,0)}}
-.xiaoqi-cta .cta-sub{font-size:13px;opacity:0.85;margin-top:4px}
-
-/* Footer CTA */
-.footer-cta{position:fixed;bottom:0;left:0;right:0;z-index:150;background:linear-gradient(90deg,#1a3a5c,#1a5c3a);color:#fff;padding:12px 20px;text-align:center;font-size:14px;font-weight:700;letter-spacing:1px;box-shadow:0 -4px 20px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;cursor:pointer}
-.footer-cta .f-emoji{font-size:20px}
-.footer-cta .f-code{background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:20px;font-size:15px;letter-spacing:2px;font-weight:900;border:1px dashed rgba(255,255,255,0.5)}
-.footer-cta .f-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;border:none;background:rgba(255,255,255,0.2);color:#fff;font-size:14px;cursor:pointer;line-height:1}
-@media(max-width:768px){.footer-cta{font-size:12px;padding:10px 14px;gap:6px}.footer-cta .f-code{font-size:13px;padding:4px 12px}}
+/* Responsive */
+@media(max-width:768px){
+.nav-links{display:none}
+.nav-inner{gap:6px;flex-wrap:nowrap}
+.search-wrap{max-width:200px}
+.hero-stats{gap:12px}
+.hero-stat{padding:12px 18px}
+.hero-stat .num{font-size:24px}
+.food-grid,.attraction-grid{grid-template-columns:1fr}
+.campus-marker .dot{width:32px;height:32px;font-size:16px}
+.campus-marker .label{display:none}
+.map-bg{aspect-ratio:1.2}
+}
+@media(max-width:480px){
+.nav-logo{font-size:14px}
+.search-wrap{max-width:140px}
+.search-wrap input{font-size:11px;padding:7px 28px 7px 28px}
+}
 </style>
 </head>
 <body>
 
 <!-- Hero -->
-<section class="hero" id="top">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">🎓 集美大学 · 新生生存指南</div>
-    <h1>校区周边<span>吃喝玩乐</span><br>终极攻略</h1>
-    <p>9大校区 · 50+家真实美食 · 12个打卡景点 · 学长学姐亲测推荐</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="num">9</div><div class="label">大校区</div></div>
-      <div class="hero-stat"><div class="num">50+</div><div class="label">美食推荐</div></div>
-      <div class="hero-stat"><div class="num">12</div><div class="label">景点打卡</div></div>
-      <div class="hero-stat"><div class="num">¥15</div><div class="label">人均消费</div></div>
-    </div>
-  </div>
-  <div class="scroll-hint" onclick="document.getElementById('map-area').scrollIntoView({behavior:'smooth'})">▼ 开始探索各校区美食</div>
+<section class="hero">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-badge">🎓 集美大学 · 校区周边完全指南</div>
+<h1>在集美，<span>吃好玩好</span></h1>
+<p>九大校区 · 78+美食 · 16个景点 · 六大商圈 · 夜生活全攻略<br>点击校区查看周边一切好吃好玩</p>
+<div class="hero-stats"><div class="hero-stat"><div class="num">78+</div><div class="label">收录美食</div></div><div class="hero-stat"><div class="num">7</div><div class="label">校区地图</div></div><div class="hero-stat"><div class="num">16</div><div class="label">打卡景点</div></div></div>
+</div>
+<div class="scroll-hint" onclick="document.getElementById('map-area').scrollIntoView({behavior:'smooth'})">▼ 开始探索各校区美食</div>
 </section>
 
-<!-- Xiaoqi CTA Banner -->
-<div class="xiaoqi-cta">
-  <div class="cta-text">🎓 找小七学姐，领更多集大新生指南！</div>
-  <div class="cta-wechat">＋ JMUXJ1920</div>
-  <div class="cta-sub">📲 装修/社团/选课/周边探店 · 一站式解答</div>
-</div>
+<!-- CTA Banner -->
+<div class="cta-banner">🎓 找小七学姐，领更多集大新生指南！<span class="wx">＋JMUXJ1920</span></div>
 
 <!-- Nav -->
 <nav class="nav" id="nav">
-  <div class="nav-inner">
-    <div class="nav-logo">🏫 集大吃喝玩乐指南</div>
-    <div class="nav-links">
-      <a href="#map-area" onclick="smoothScroll('#map-area')">🗺️ 校区地图</a>
-      <a href="#top10" onclick="smoothScroll('#top10')">🏆 必吃TOP10</a>
-      <a href="#route" onclick="smoothScroll('#route')">🛣️ 逛吃路线</a>
-    </div>
-  </div>
+<div class="nav-inner">
+<div class="nav-logo">🍜 集大吃喝玩乐</div>
+<div class="nav-links"><a href="#map-area">🗺️地图</a><a href="#top10">🏆必吃TOP10</a><a href="#route">🛣️逛吃路线</a></div>
+<div class="search-wrap">
+<span class="sicon">🔍</span>
+<input type="text" id="searchInput" placeholder="搜索美食/景点/饮品/火锅..." oninput="doSearch(this.value)" onfocus="doSearch(this.value)" onblur="setTimeout(()=>document.getElementById('searchResults').classList.remove('show'),200)">
+<div class="search-results" id="searchResults"></div>
+</div>
+</div>
 </nav>
 
 <!-- Map Section -->
 <div class="section" id="map-area">
-  <div class="section-title">
-    <h2>🗺️ 九大校区分布地图</h2>
-    <p>点击校区标记查看周边吃喝玩乐攻略</p>
-  </div>
-
-  <!-- Mobile campus buttons -->
-  <div class="campus-grid" id="campusBtns"></div>
-
-  <div class="map-container">
-    <div class="map-bg" id="map">
-      <div class="water xinglin"></div>
-      <div class="water longzhou"></div>
-      <div class="road sg"></div>
-      <div class="road yd"></div>
-    </div>
-    <div class="map-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#e85d3a"></div>主校区群</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#3a6fb5"></div>专业校区</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#1a5c3a"></div>周边地标</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#ff9500"></div>商圈</div>
-    </div>
-  </div>
+<div class="section-title"><h2>🗺️ 校区美食地图</h2><p>点击彩色标记，查看每个校区周边的吃喝玩乐</p></div>
+<div class="map-container">
+<div class="map-bg">
+<div class="water xinglin"></div>
+<div class="water longzhou"></div>
+<div class="road sg"></div>
+<div class="campus-marker" style="left:72%;top:52%" onclick="openCampus('hanghai')"><div class="dot" style="background:#2d6a4f">🚢</div><div class="label">航海学院</div></div><div class="campus-marker" style="left:55%;top:38%" onclick="openCampus('lunji')"><div class="dot" style="background:#1a3a5c">⚓</div><div class="label">轮机工程学院</div></div><div class="campus-marker" style="left:28%;top:65%" onclick="openCampus('dashu')"><div class="dot" style="background:#e8652e">🐟</div><div class="label">水产/科学馆校区</div></div><div class="campus-marker" style="left:40%;top:78%" onclick="openCampus('caimao')"><div class="dot" style="background:#7b2d8b">🎵</div><div class="label">财经/师范/音乐学院</div></div><div class="campus-marker" style="left:85%;top:30%" onclick="openCampus('chengyi')"><div class="dot" style="background:#c2410c">🎓</div><div class="label">诚毅学院</div></div><div class="campus-marker" style="left:92%;top:45%" onclick="openCampus('huada')"><div class="dot" style="background:#1e40af">🏫</div><div class="label">华侨大学(万科云城)</div></div><div class="campus-marker" style="left:60%;top:72%" onclick="openCampus('gongxiao')"><div class="dot" style="background:#0d9488">🏪</div><div class="label">供销社/集美供街区</div></div>
 </div>
-
-<!-- Modal -->
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <h3 id="modalTitle"></h3>
-      <div class="sub" id="modalSub"></div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-tabs" id="modalTabs"></div>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
+<div class="btn-row"><button class="btn-campus" style="background:#2d6a4f" onclick="openCampus('hanghai')">🚢 航海学院</button><button class="btn-campus" style="background:#1a3a5c" onclick="openCampus('lunji')">⚓ 轮机工程学院</button><button class="btn-campus" style="background:#e8652e" onclick="openCampus('dashu')">🐟 水产/科学馆校区</button><button class="btn-campus" style="background:#7b2d8b" onclick="openCampus('caimao')">🎵 财经/师范/音乐学院</button><button class="btn-campus" style="background:#c2410c" onclick="openCampus('chengyi')">🎓 诚毅学院</button><button class="btn-campus" style="background:#1e40af" onclick="openCampus('huada')">🏫 华侨大学(万科云城)</button><button class="btn-campus" style="background:#0d9488" onclick="openCampus('gongxiao')">🏪 供销社/集美供街区</button></div>
+</div>
 </div>
 
 <!-- TOP10 -->
 <div class="section" id="top10">
-  <div class="section-title">
-    <h2>🏆 学长学姐必吃TOP10</h2>
-    <p>集大四年吃出来的精华 · 点击卡片查看详情</p>
-  </div>
-  <div class="food-grid" id="top10Grid"></div>
-  <div class="ai-disclaimer" style="max-width:900px;margin:20px auto 0">
-    <span class="icon">🤖</span>
-    <span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！<br>千人千味，希望大家都能找到自己的梦中情饭！❤️</span>
-  </div>
+<div class="section-title"><h2>🏆 小七学姐必吃TOP10</h2><p>学长学姐用胃投票出来的神店，每一家都值得专程去吃</p></div>
+<div class="top10-grid"><div class="food-card" onclick="openCampus('dashu')" style="cursor:pointer"><img src="images/dongfenya.png" class="food-card-img" alt="奔水冬粉鸭" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 奔水冬粉鸭</h4><span class="price">¥18</span></div><div class="meta"><span class="rating">⭐5.0</span><span>闽菜</span></div><div class="addr">📍 大社路</div><div class="review">"《夏至未至》取景地！鸭汤清澈鲜甜，鸭肉嫩滑鸭血弹牙，冬粉晶莹剔透。集美美食名片，必吃！..."</div></div></div><div class="food-card" onclick="openCampus('dashu')" style="cursor:pointer"><img src="images/shachamian.png" class="food-card-img" alt="大社戏台沙茶面" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 大社戏台沙茶面</h4><span class="price">¥16</span></div><div class="meta"><span class="rating">⭐4.7</span><span>面食</span></div><div class="addr">📍 大社戏台旁</div><div class="review">"《早餐中国》推荐！坐在戏台边吃面，沙茶汤浓郁花生香，鲜虾鱿鱼豆腐泡满满一碗。限量供应卖完收摊。..."</div></div></div><div class="food-card" onclick="openCampus('hanghai')" style="cursor:pointer"><img src="images/liji.png" class="food-card-img" alt="豪香嫩里脊肉串" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 豪香嫩里脊肉串</h4><span class="price">¥4/串</span></div><div class="meta"><span class="rating">⭐4.6</span><span>小吃</span></div><div class="addr">📍 石鼓路32号</div><div class="review">"石鼓路排队王！肉质超嫩，微辣调味刚刚好，现炸现卖4元一串性价比爆表。饭点排队15分钟起。..."</div></div></div><div class="food-card" onclick="openCampus('dashu')" style="cursor:pointer"><img src="images/xiangli.png" class="food-card-img" alt="巷里·创意家常菜" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 巷里·创意家常菜</h4><span class="price">¥77</span></div><div class="meta"><span class="rating">⭐4.7</span><span>闽菜</span></div><div class="addr">📍 尚南路170-101</div><div class="review">"大社古厝里的创意闽菜，桂花酒酿豆花羹是招牌。拍照好看味道也在线，适合约会有格调。..."</div></div></div><div class="food-card" onclick="openCampus('dashu')" style="cursor:pointer"><img src="images/youshiyoutai.png" class="food-card-img" alt="有时有泰·泰式料理" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 有时有泰·泰式料理</h4><span class="price">¥84</span></div><div class="meta"><span class="rating">⭐4.8</span><span>东南亚</span></div><div class="addr">📍 尚南路170-2号</div><div class="review">"大社最火的泰料！冬阴功汤用料新鲜，芒果糯米饭椰香浓郁。周末要排1小时。..."</div></div></div><div class="food-card" onclick="openCampus('hanghai')" style="cursor:pointer"><img src="images/jidongmada.png" class="food-card-img" alt="鸡动马达" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 鸡动马达</h4><span class="price">¥10-25</span></div><div class="meta"><span class="rating">⭐4.5</span><span>炸物</span></div><div class="addr">📍 石鼓路30号</div><div class="review">"鸡柳+薯条+年糕三件套炸得金黄酥脆撒甘梅粉，大份才25元！年糕外酥里糯是灵魂。..."</div></div></div><div class="food-card" onclick="openCampus('hanghai')" style="cursor:pointer"><img src="images/xiandougao.png" class="food-card-img" alt="王记仙豆糕" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 王记仙豆糕</h4><span class="price">¥18</span></div><div class="meta"><span class="rating">⭐4.5</span><span>甜品</span></div><div class="addr">📍 石鼓路</div><div class="review">"爆浆芝士紫薯味yyds！外皮金黄微焦，掰开奶酪拉丝，芋泥绵密香甜。趁热吃！..."</div></div></div><div class="food-card" onclick="openCampus('hanghai')" style="cursor:pointer"><img src="images/naicha.png" class="food-card-img" alt="一树一叶" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 一树一叶</h4><span class="price">¥18</span></div><div class="meta"><span class="rating">⭐4.6</span><span>饮品</span></div><div class="addr">📍 石鼓路60-1号</div><div class="review">"厦门本土品牌，闽南青观音雪山必点！铁观音茶底配鲜奶，清爽不腻。凤梨青观音也推荐。..."</div></div></div><div class="food-card" onclick="openCampus('caimao')" style="cursor:pointer"><img src="images/yangfujiangmaci.png" class="food-card-img" alt="杨府匠麻糍" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 杨府匠麻糍</h4><span class="price">¥8</span></div><div class="meta"><span class="rating">⭐4.5</span><span>甜品</span></div><div class="addr">📍 塘埔路139-22号</div><div class="review">"陈星旭和大表哥都来打卡！麻糍现点现做，冰淇淋内馅+芋泥+脆脆三重口感。卖光就打烊，赶早！..."</div></div></div><div class="food-card" onclick="openCampus('hanghai')" style="cursor:pointer"><img src="images/pidanchoudoufu.png" class="food-card-img" alt="欢喜说·皮蛋臭豆腐" onerror="this.style.display='none'"><div class="food-card-body"><div class="food-card-top"><h4>🏅 欢喜说·皮蛋臭豆腐</h4><span class="price">¥10</span></div><div class="meta"><span class="rating">⭐4.7</span><span>小吃</span></div><div class="addr">📍 石鼓路</div><div class="review">"强推！外酥里嫩一口爆汁，加皮蛋+2元，黄瓜丝和酸甜泡菜搅拌后每块都裹满酱汁，绝了！..."</div></div></div></div>
+<div class="ai-disclaimer" style="margin-top:20px"><span class="ai-icon">🤖</span><span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！千人千味，希望大家都能找到自己的梦中情饭！❤️</span></div>
 </div>
 
 <!-- Route -->
 <div class="section" id="route">
-  <div class="section-title">
-    <h2>🛣️ 一日暴走逛吃路线</h2>
-    <p>跟着路线走，一天吃遍集美精华</p>
-  </div>
-  <div id="routeList"></div>
-  
-  <!-- Final CTA -->
-  <div style="text-align:center;padding:20px 0 80px">
-    <div class="btn btn-primary" style="font-size:16px;padding:14px 36px" onclick="window.scrollTo({top:0,behavior:'smooth'})">👆 回顶部 · 找小七学姐＋JMUXJ1920</div>
-  </div>
+<div class="section-title"><h2>🛣️ 推荐逛吃路线</h2><p>两条精心设计的路线，吃好玩好不走冤枉路</p></div>
+<div style="max-width:700px;margin:0 auto">
+<h3 style="color:#1a3a5c;margin-bottom:16px">☀️ 一日暴走路线（9:00-21:30）</h3>
+<div class="route-list">
+<div class="route-step"><div class="route-time">09:00</div><div class="route-desc"><strong>地铁1号线</strong> 海上列车体验 → 集美学村站下车，先来一杯<strong>片仔癀草甘蔗汁</strong>(¥15)醒神</div></div>
+<div class="route-step"><div class="route-time">10:00</div><div class="route-desc">逛<strong>龙舟池+南薰楼群</strong> 拍照，上午光线最好，红砖建筑倒映水面</div></div>
+<div class="route-step"><div class="route-time">11:30</div><div class="route-desc">钻进<strong>大社</strong>，吃<strong>奔水冬粉鸭</strong>(¥18)+<strong>大社戏台沙茶面</strong>(¥16)，逛古厝和文创小店</div></div>
+<div class="route-step"><div class="route-time">14:00</div><div class="route-desc"><strong>嘉庚公园+鳌园</strong>，看石雕艺术，了解华侨历史。顺路打卡<strong>楚雨荨家</strong></div></div>
+<div class="route-step"><div class="route-time">16:00</div><div class="route-desc"><strong>石鼓路</strong>开逛！鸡动马达→豪香肉串→王记仙豆糕→帕帕栗酥饼→一树一叶奶茶</div></div>
+<div class="route-step"><div class="route-time">18:30</div><div class="route-desc"><strong>十里长堤</strong>等日落，草坪上听街头歌手弹唱，拍海上列车落日</div></div>
+<div class="route-step"><div class="route-time">19:30</div><div class="route-desc">晚餐：<strong>三胖东北烤肉</strong>(¥55)或<strong>有时有泰</strong>(¥84)，吃饱喝足</div></div>
+<div class="route-step"><div class="route-time">21:00</div><div class="route-desc"><strong>供销茶咖</strong>喝杯晚安咖啡，或去<strong>十里长堤</strong>继续吹海风听歌。完美一天！</div></div>
+</div>
+</div>
 </div>
 
-<!-- Sticky Footer CTA -->
-<div class="footer-cta" id="footerCta">
-  <span class="f-emoji">👇</span>
-  <span>找小七学姐领更多指南</span>
-  <span class="f-code">＋JMUXJ1920</span>
-  <button class="f-close" onclick="document.getElementById('footerCta').style.display='none'">✕</button>
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+<div class="modal" id="modal">
+<div class="modal-header"><h3 id="modalTitle"></h3><button class="modal-close" onclick="closeModal()">&times;</button></div>
+<div class="modal-tabs">
+<button class="modal-tab active" onclick="switchTab('food')">🍜 周边美食</button>
+<button class="modal-tab" onclick="switchTab('attr')">📸 周边景点</button>
+<button class="modal-tab" onclick="switchTab('shop')">🛍️ 购物商圈</button>
+<button class="modal-tab" onclick="switchTab('night')">🌃 夜生活</button>
+<button class="modal-tab" onclick="switchTab('trans')">🚇 交通</button>
 </div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta" id="stickyCta">📱 找小七学姐领更多指南 ＋JMUXJ1920<button class="close-cta" onclick="document.getElementById('stickyCta').style.display='none'">✕</button></div>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-// ============ DATA ============
-const CAMPUSES = {
-  zhu: {
-    name:'主校区（本部）',sub:'银江路185号',color:'#e85d3a',
-    pos:{x:52,y:42},badge:'本部',
-    food:[
-      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'《夏至未至》取景地！开了十几年的老店，鸭汤清甜醇厚，鸭血只要一块钱超嫩滑，冬粉Q弹入味，饭点经常排队。','tags':['hot','rec']},
-      {name:'阿鹭酸笋面',price:'¥15',rating:'⭐4.6',type:'闽南小吃',addr:'集源路集美学府SOHO附近',img:'images/suansunmian.png',review:'酸笋味浓郁到没进门就能闻到，汤头酸爽开胃，可选几十种配料，醋肉是隐藏招牌。','tags':['hot']},
-      {name:'森格藏布藏式酸奶',price:'¥12',rating:'⭐4.5',type:'甜品饮品',addr:'岑东路3号1楼3号店',img:'images/zangsuannai.png',review:'有故事的店——老板大学时和女友常来，后来盘下这家店留下回忆。主打藏式酸奶，奶味醇厚需自己加糖。','tags':['rec']},
-      {name:'帕帕烘焙栗酥饼',price:'¥10',rating:'⭐4.6',type:'糕点',addr:'集岑路1-78-101号',img:'images/lisubing.png',review:'石鼓路排队王！栗酥饼分甜咸两味，外皮酥到掉渣，芋泥饼甜度刚好。刚出炉趁热吃最绝，老厦门都专程来买。','tags':['hot','rec']},
-      {name:'王记仙豆糕',price:'¥12',rating:'⭐4.5',type:'糕点',addr:'集岑路1-102号',img:'images/xiandougao.png',review:'网红仙豆糕，紫薯芋泥肉松抹茶等口味齐全，芋泥奶酪款最受欢迎，热乎的皮酥馅糯。','tags':['new']},
-      {name:'老森咖喱',price:'¥28',rating:'⭐4.4',type:'东南亚',addr:'石鼓路15-3',img:'images/laosencurry.png',review:'集美学村知名咖喱店，装修复古适合拍照。招牌百香果咖喱和南瓜咖喱在其他地方很少见，咖喱浓郁配炸鸡块一绝。','tags':['rec']},
-    ],
-    attractions:[
-      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'集美标志性景观，碧绿池水映衬嘉庚建筑群，南薰楼高耸入云。端午龙舟赛最热闹，平日散步拍照也极美，推荐傍晚时分来。'},
-      {name:'南薰楼群',price:'免费',img:'',desc:'嘉庚风格建筑代表作，红砖绿瓦中西合璧，《一起来看流星雨》取景地之一。'},
-    ],
-    shopping:[{name:'石鼓路商圈',desc:'集美学子的"美食大道"，从街头吃到街尾，小吃、奶茶、餐馆一应俱全。',tip:'适合放学后扫街'}],
-    nightlife:[{name:'石鼓路夜市',desc:'夜幕降临后石鼓路变身夜市，烤串、关东煮、炒酸奶摊前围满人，烟火气拉满。'}],
-    transport:'地铁1号线集美学村站步行10分钟；多路公交可达区政府站。骑行5分钟到龙舟池，步行10分钟到石鼓路。'
-  },
-  hanghai:{
-    name:'航海学院',sub:'嘉庚路1号',color:'#3a6fb5',pos:{x:70,y:25},badge:'航海',
-    food:[
-      {name:'一树一叶(石鼓路店)',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'厦门本土茶饮品牌，被称为"厦门茶颜悦色"。闽南青观音雪山必点，铁观音茶底+鲜奶，清爽不腻。闽南花砖墙面超好拍。','tags':['hot','rec']},
-      {name:'小刘印度飞饼',price:'¥13',rating:'⭐4.5',type:'小吃',addr:'石鼓路（南段）',img:'images/feibing.png',review:'阿姨现场甩面堪称街头表演！金褐色薄脆外壳，火腿鸡蛋馅最经典。老板温馨提醒"别系紧塑料袋，不然不脆了"。仅此一家。','tags':['hot','rec']},
-      {name:'豪香嫩里脊肉串(财院店)',price:'¥4/串',rating:'⭐4.6',type:'炸串',addr:'石鼓路32号',img:'images/liji.png',review:'沙茶腌料渗透肉心，外酥里嫩汁水爆炸。老板油温把控出神入化，撒孜然辣椒粉，配钵钵鸡一起吃层次翻倍！','tags':['hot','rec']},
-      {name:'鸡动马达',price:'¥10',rating:'⭐4.5',type:'炸物',addr:'石鼓路',img:'images/jidongmada.png',review:'年糕片+薯条+鸡柳的王炸组合，咸甜辣三味融合，炸得酥脆喷香。每次排长队，但值得等。','tags':['hot']},
-      {name:'大阪烧(石鼓路店)',price:'¥14',rating:'⭐4.3',type:'小吃',addr:'石鼓路46-101号',img:'images/dabanshao.png',review:'一天能卖几百个！满满料+芝士拉丝，柴鱼丝在表面跳舞。黑胡椒酱汁是灵魂，一勺挖到底超满足。','tags':['hot']},
-      {name:'水立方古早味柠檬茶',price:'¥10',rating:'⭐4.5',type:'饮品',addr:'石鼓路',img:'images/ningmengcha.png',review:'1000cc超大杯才10元！古早味柠檬茶和普通的不一样，解腻神器，边走边喝刚刚好。','tags':['rec']},
-    ],
-    attractions:[
-      {name:'十里长堤',price:'免费',img:'images/shilichangdi.png',desc:'集美最浪漫的地方！傍晚橙色晚霞洒满海面，远处跨海大桥做背景，草地上年轻人弹吉他唱歌。适合谈恋爱、发呆、看日落，周末有街头艺人表演。'},
-      {name:'楚雨荨的家',price:'免费',img:'',desc:'《一起来看流星雨》拍摄地，集美学子的青春回忆。适合拍复古校园风照片。'},
-    ],
-    shopping:[{name:'石鼓路商圈（北段）',desc:'紧邻石鼓路美食街最热闹的一段，从飞饼到肉串到奶茶一条龙。',tip:'从街头吃到街尾'}],
-    nightlife:[{name:'十里长堤街头音乐',desc:'周末晚上草坪上有自发组织的吉他弹唱，年轻人们围坐听歌，氛围感拉满。'},{name:'石鼓路夜市',desc:'深夜小吃摊依然灯火通明，烤苕皮、铁板烧、炒酸奶供应到深夜。'}],
-    transport:'地铁1号线集美学村站步行15分钟。石鼓路就在校门口，扫辆共享单车几分钟就到万达。'
-  },
-  lunjin:{
-    name:'轮机工程学院',sub:'石鼓路78号',color:'#3a6fb5',pos:{x:55,y:55},badge:'轮机',
-    food:[
-      {name:'豪香嫩里脊肉串(财院店)',price:'¥4/串',rating:'⭐4.6',type:'炸串',addr:'石鼓路32号',img:'images/liji.png',review:'就在石鼓路上，轮机学子走路三分钟到。里脊肉提前腌制后现炸，肉质嫩到惊艳，撒上孜然和辣椒，配钵钵鸡一起吃层次丰富。','tags':['hot','rec']},
-      {name:'小刘印度飞饼',price:'¥13',rating:'⭐4.5',type:'小吃',addr:'石鼓路（南段）',img:'images/feibing.png',review:'阿姨甩面的手艺堪称街头一景。金褐色薄脆外壳，馅料丰富，咸甜都有。老板提醒别系紧袋子不然不脆。','tags':['hot']},
-      {name:'一树一叶',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'厦门本土"茶颜悦色"。闽南青观音雪山必点，铁观音+鲜奶的清爽搭配让无数集美学子上头。','tags':['hot','rec']},
-      {name:'美阿玉米汁',price:'¥10',rating:'⭐4.4',type:'饮品',addr:'石鼓路34号',img:'images/yumizhi.png',review:'每杯都是新鲜玉米现榨，浓稠香滑无负担。冬瓜玉米须茶更清爽，冰镇款解腻一流。','tags':['rec']},
-      {name:'梅干菜扣肉饼',price:'¥9',rating:'⭐4.3',type:'小吃',addr:'石鼓路',img:'images/kouroubing.png',review:'饼大料足现做现卖，刚出炉时梅干菜香气飘十里。一个就能顶一顿饭，江湖人称"石鼓路扛把子"。','tags':['hot']},
-      {name:'漳州麻糍冰淇淋',price:'¥5',rating:'⭐4.4',type:'甜品',addr:'石鼓路',img:'images/maciicecream.png',review:'糯叽叽的麻糍包上冰淇淋，软糯+冰爽的奇妙组合。口味超多，买一盒带回寝室。','tags':['new']},
-    ],
-    attractions:[
-      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'步行10分钟即达。池畔嘉庚建筑倒映水中，是轮机学子课后最爱去的地方。端午赛龙舟时最值得看。'},
-      {name:'南堤公园',price:'免费',img:'',desc:'临海小公园，散步吹风好去处。可以看到集美大桥和海上日落。'},
-    ],
-    shopping:[{name:'石鼓路',desc:'校门口就是石鼓路美食街核心段，出门就能吃到嗨。',tip:'零距离美食'},{name:'集美万达广场',desc:'步行15分钟，看电影、逛街、聚餐一站式解决。'}],
-    nightlife:[{name:'石鼓路夜市',desc:'石鼓路深夜变身美食夜市，烤串、鸡蛋仔、关东煮供应到凌晨。'}],
-    transport:'就在石鼓路核心地段，步行5分钟到龙舟池，骑行10分钟到万达。校门口多路公交直达厦门市区。'
-  },
-  caimao:{
-    name:'财经学院',sub:'集岑路',color:'#e85d3a',pos:{x:48,y:35},badge:'财经',
-    food:[
-      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'距离财经学院最近的老字号！电视剧《夏至未至》取景地。鸭汤醇厚鲜美，鸭血嫩滑只要一块钱，财经学子的"食堂"之一。','tags':['hot','rec']},
-      {name:'帕帕烘焙栗酥饼',price:'¥10',rating:'⭐4.6',type:'糕点',addr:'集岑路1-78-101号',img:'images/lisubing.png',review:'财经学院附近的人气王，栗酥饼甜咸双味，酥到掉渣。芋泥馅的也好吃，甜而不腻。','tags':['hot']},
-      {name:'王记仙豆糕',price:'¥12',rating:'⭐4.5',type:'糕点',addr:'集岑路1-102号',img:'images/xiandougao.png',review:'就在集岑路上，四四方方的仙豆糕超可爱。芋泥奶酪是爆款，热乎时外酥内糯。','tags':['new']},
-      {name:'三胖家东北烤肉',price:'¥50',rating:'⭐4.4',type:'烤肉',addr:'银亭路8号',img:'images/dongbeikaorou.png',review:'东北烤肉在集美很出名，肉现切现腌非冷冻，性价比高，老板热情常打折，回头客超多。','tags':['rec']},
-      {name:'老森咖喱',price:'¥28',rating:'⭐4.4',type:'东南亚',addr:'石鼓路15-3',img:'images/laosencurry.png',review:'复古风咖喱店，百香果咖喱和南瓜咖喱独特又好吃。环境适合约会拍照。','tags':['rec']},
-      {name:'补·药膳·酒居',price:'¥35',rating:'⭐4.3',type:'药膳炖品',addr:'岑东路58-102',img:'images/buyaoshan.png',review:'藏在岑东路的药膳小馆，四物老鸭汤、乌鸡汤、当归牛腩等滋补炖罐应有尽有。周一至周五晚上才营业（17:30-21:30），一人一盅慢慢喝。','tags':['rec']},
-    ],
-    attractions:[
-      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'财经学院步行5分钟就到。池畔散步、拍照、发呆，傍晚夕阳西下时最美。'},
-      {name:'嘉庚公园/鳌园',price:'免费',img:'',desc:'了解陈嘉庚先生生平，鳌园的石雕艺术令人叹为观止。必去景点。'},
-    ],
-    shopping:[{name:'石鼓路',desc:'步行5分钟，集美学子最爱的美食街，从白天吃到深夜。'},{name:'集岑路一带',desc:'集岑路本身也有很多小店，仙豆糕、栗酥饼都在这条路上。'}],
-    nightlife:[{name:'石鼓路夜市',desc:'深夜食堂模式，各类小吃摊灯火通明。'}],
-    transport:'地铁集美学村站步行约12分钟。校门口就是石鼓路/集岑路交叉口，步行去哪都方便。'
-  },
-  dashu:{
-    name:'水产/科学馆校区',sub:'大社路周边',color:'#e85d3a',pos:{x:40,y:30},badge:'大社',
-    food:[
-      {name:'大社戏台沙茶面',price:'¥16',rating:'⭐4.7',type:'闽南小吃',addr:'大社路96-101号',img:'images/shachamian.png',review:'被集美人称为"厦门最好吃的沙茶面"！汤底沙茶味浓郁偏甜，花生碎是灵魂。老板夫妇在戏台旁经营多年，《早餐中国》曾推荐。认准正牌老店！','tags':['hot','rec']},
-      {name:'联生老店',price:'¥15',rating:'⭐4.6',type:'闽南小炒',addr:'大社路128号',img:'images/lianshengchaomian.png',review:'隐藏在大社里的老字号。联生炒面是每桌必点，闽南碱面配虾仁肉片青菜，料足味美。只有中午和傍晚营业。','tags':['hot','rec']},
-      {name:'大社阿发海蛎饼',price:'¥6',rating:'⭐4.5',type:'小吃',addr:'盛光路50-101号',img:'images/hailipng',review:'每张饼夹六七个饱满海蛎，超厚实！海蛎的鲜甜和蔬菜的清香在口中交织，海鲜爱好者必试。','tags':['hot']},
-      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'从大社走过去也不远。鸭汤醇厚鲜美，鸭血一块钱无敌滑嫩，加一份油条蘸汤吃才是正确打开方式。','tags':['hot','rec']},
-      {name:'森格藏布藏式酸奶',price:'¥12',rating:'⭐4.5',type:'甜品饮品',addr:'岑东路3号',img:'images/zangsuannai.png',review:'西藏酸奶在闽南的奇妙碰撞。奶味浓郁醇厚，加糖后超好喝。店里的西藏装饰都是老板旅行带回。','tags':['rec']},
-      {name:'大社阿鹭酸笋面',price:'¥15',rating:'⭐4.6',type:'小吃',addr:'集源路',img:'images/suansunmian.png',review:'酸笋味霸气十足，几十种配料任选，醋肉是隐藏王牌。分量足味道好。','tags':['hot']},
-      {name:'巷里·创意家常菜',price:'¥77',rating:'⭐4.7',type:'创意家常',addr:'尚南路170-101室',img:'images/xiangli.png',review:'大社旁的宝藏小店！桂花酒酿豆花羹冰凉清口是招牌甜品，梅干菜烧鸡爪软糯入味，麻油爆炒跳跳香到隔壁。原木风装修很治愈，排队是常态。','tags':['hot','rec']},
-      {name:'有时有泰·泰式料理',price:'¥84',rating:'⭐4.8',type:'东南亚',addr:'尚南路170-2号',img:'images/youshiyoutai.png',review:'评分高达4.8的泰式料理！就在巷里隔壁，冬阴功汤酸辣开胃，泰式奶茶正宗到像在清迈。大社区域最高分餐厅之一。','tags':['hot','rec']},
-      {name:'GuduGudu·面馆',price:'¥49',rating:'⭐4.3',type:'日式面馆',addr:'尚南路180-1-102号',img:'images/gudugudu.png',review:'日剧里走出来的治愈系面馆！牛肉末番茄浓汤面是必点，汤底像鲜榨番茄般浓郁。葱丝大排外酥里嫩，流心蛋堪称厦门第一。一人食约会都适合。','tags':['new','rec']},
-      {name:'重庆铺盖面',price:'¥12',rating:'⭐4.3',type:'川渝面食',addr:'盛光路13-5号',img:'images/pugaimian.png',review:'水产学子私藏的平价面馆！杂酱铺盖面宽大厚实，小碗就能吃饱。老板一口川渝话亲切爽朗，从早开到深夜，人均只要12元！','tags':['hot']},
-    ],
-    attractions:[
-      {name:'集美大社',price:'免费',img:'',desc:'闽南传统古村落，红砖古厝和石板小巷保留着原汁原味的闽南风情。在这里可以找到最正宗的古早味美食，还有文创小店和壁画墙。'},
-      {name:'嘉庚公园',price:'免费',img:'',desc:'纪念爱国华侨陈嘉庚先生的园林公园，环境清幽，适合散步拍照。鳌园石雕是一绝。'},
-      {name:'南薰楼',price:'免费',img:'',desc:'嘉庚建筑的代表作，红砖砌筑中西合璧风格，是集美最高建筑之一，登楼可远眺海景。'},
-    ],
-    shopping:[{name:'大社文创小店',desc:'古厝改造的文创店、咖啡馆和手作工作室，文艺气息浓厚。'},{name:'石鼓路',desc:'往东走10分钟就到大名鼎鼎的石鼓路美食街。'}],
-    nightlife:[{name:'大社古厝茶室',desc:'夜晚坐在古厝天井喝茶聊天，闽南韵味十足。'}],
-    transport:'地铁集美学村站步行约20分钟或骑行8分钟。大社区域适合步行探索，钻进巷子会有惊喜。'
-  },
-  shifan:{
-    name:'师范学院',sub:'印斗路',color:'#e85d3a',pos:{x:62,y:38},badge:'师范',
-    food:[
-      {name:'大阪烧(石鼓路店)',price:'¥14',rating:'⭐4.3',type:'小吃',addr:'石鼓路46-101号',img:'images/dabanshao.png',review:'只走几分钟就到石鼓路。满满配菜+芝士拉丝，黑胡椒酱汁是灵魂。一天卖出几百个，学生最爱。','tags':['hot']},
-      {name:'鸡动马达',price:'¥10',rating:'⭐4.5',type:'炸物',addr:'石鼓路',img:'images/jidongmada.png',review:'年糕+薯条+鸡柳的黄金组合，咸甜辣三味融合。排队虽长但绝对值得。','tags':['hot']},
-      {name:'邱思明炒食',price:'¥15',rating:'⭐4.4',type:'炒面',addr:'岑东路44号104',img:'images/chaopaomian.png',review:'开了十来年的炒面店！自选小料均价3元，招牌炒泡面，大火爆炒的锅气配上黑胡椒酱，微辣香浓。','tags':['rec']},
-      {name:'一树一叶(石鼓路店)',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'厦门茶颜悦色。闽南青观音雪山用铁观音茶底配鲜奶，清爽回甘，超适合师范学院的下午茶。','tags':['hot','rec']},
-      {name:'熊阿熊西瓜碎奶·福伯烧仙草',price:'¥13',rating:'⭐4.6',type:'饮品',addr:'集岑路1-82号',img:'images/xiguasuinai.png',review:'夏天必喝的西瓜碎奶，烧仙草也是招牌，消暑解渴第一名。','tags':['rec','new']},
-      {name:'喜旺梨台湾菜',price:'¥76',rating:'⭐4.7',type:'台湾菜',addr:'石鼓路166号-111',img:'images/xiwangli.png',review:'石鼓路上的正宗台湾菜！老板是资深周杰伦粉丝，店里循环播放周董的歌，送周杰伦冰箱贴。台式三杯鸡紧实入味，旺梨炒饭粒粒分明，胡椒奶油玉米超惊艳。','tags':['hot','rec']},
-    ],
-    attractions:[
-      {name:'嘉庚公园',price:'免费',img:'',desc:'离师范学院很近，是课后散步的好去处。了解嘉庚精神，欣赏鳌园石雕。'},
-      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'步行十几分钟，池畔看嘉庚建筑群的绝美倒影，是师院学生常去的发呆地。'},
-    ],
-    shopping:[{name:'石鼓路',desc:'步行8分钟到石鼓路核心段，吃喝玩乐一应俱全。'},{name:'印斗路小店',desc:'校门口街边小超市和便利店，日常用品购物方便。'}],
-    nightlife:[{name:'石鼓路夜市',desc:'夜市模式开启后从小吃到炸物到甜品全都有，适合结伴扫街。'}],
-    transport:'多路公交可达。步行到石鼓路8分钟，骑行到龙舟池10分钟。'
-  },
-  meishu:{
-    name:'美术与设计学院',sub:'集岑路',color:'#e85d3a',pos:{x:45,y:38},badge:'美院',
-    food:[
-      {name:'帕帕烘焙栗酥饼',price:'¥10',rating:'⭐4.6',type:'糕点',addr:'集岑路1-78-101号',img:'images/lisubing.png',review:'就在美院附近！酥到掉渣的栗酥饼，甜味和咸味都好吃，芋泥饼也是经典。刚出炉的香气能把整条街的人吸引过来。','tags':['hot','rec']},
-      {name:'王记仙豆糕',price:'¥12',rating:'⭐4.5',type:'糕点',addr:'集岑路1-102号',img:'images/xiandougao.png',review:'与栗酥饼比邻的网红小店。仙豆糕口味丰富，芋泥奶酪款最受欢迎，热乎时外酥内糯。','tags':['new']},
-      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'美院学子的温暖食堂。冬粉鸭配油条是隐藏吃法，鸭汤醇厚鲜美，天冷时来一碗暖到胃里。','tags':['hot','rec']},
-      {name:'杨府匠麻糍',price:'¥8',rating:'⭐4.4',type:'甜品',addr:'塘埔路139-22号',img:'images/yangfujiangmaci.png',review:'芋泥冰淇淋双拼的奇妙碰撞。糯弹麻糍+冰凉冰淇淋，夏天来一份超爽。','tags':['new']},
-    ],
-    attractions:[
-      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'步行不到10分钟，美院学生写生的好去处。嘉庚建筑+碧水蓝天，怎么画怎么美。'},
-      {name:'集美大社',price:'免费',img:'',desc:'闽南古村落，红砖古厝+石板小路，文艺氛围浓厚，是美院学生寻找灵感和拍素材的好地方。'},
-    ],
-    shopping:[{name:'集岑路',desc:'校门口就是集岑路，栗酥饼、仙豆糕都在这里，还有各种文具画材店。'},{name:'石鼓路',desc:'步行5分钟无缝衔接石鼓路美食街。'}],
-    nightlife:[{name:'大社古厝咖啡',desc:'夜晚坐在百年古厝改造的咖啡馆里，文艺气息与闽南古韵交融。'}],
-    transport:'步行5分钟到石鼓路核心段，骑行10分钟可到万达或十里长堤。'
-  },
-  chengyi:{
-    name:'诚毅学院',sub:'集美大道199号',color:'#1a5c3a',pos:{x:80,y:15},badge:'诚毅',
-    food:[
-      {name:'鑫坞堂姜母鸭(集美店)',price:'¥60',rating:'⭐4.1',type:'闽菜',addr:'集岑路1-81号',img:'images/jiangmuya.png',review:'厦门名片级美食，鸭肉加姜片在砂锅里慢炖，姜香浓郁鸭肉酥烂。适合2-3人聚餐。','tags':['rec']},
-      {name:'片皮鸭(石鼓路店)',price:'¥20',rating:'⭐4.2',type:'小吃',addr:'石鼓路30-101号',img:'images/pianpiya.png',review:'物美价廉的北京风味烤鸭卷，饼薄肉多酱香，来一份边走边吃刚刚好。','tags':['rec']},
-      {name:'小鱼号酸菜鱼(石鼓路店)',price:'¥24',rating:'⭐4.1',type:'川菜',addr:'集美小学北门旁',img:'images/suancaiyu.png',review:'招牌柠檬酸汤无骨鱼，酸爽开胃价格亲民，单人份也能吃得很满足。','tags':['new']},
-      {name:'一树一叶',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'闽南铁观音奶茶，茶香和奶香都浓郁。阿达子Q弹有嚼劲，是诚毅学子的快乐水。','tags':['hot','rec']},
-      {name:'噗通·汤咖喱(华大店)',price:'¥46',rating:'⭐4.6',type:'日式咖喱',addr:'兑山西路118-203号(华大西门对面二楼)',img:'images/putongcurry.png',review:'诚毅学子的排队王！不同于浓稠日式咖喱，汤咖喱更清爽可以先喝汤。招牌猪排厚实酥脆泡在金色咖喱汤里，配溏心蛋绝了。周一店休，食材限量中午就卖光！','tags':['hot','rec']},
-    ],
-    attractions:[
-      {name:'园博苑',price:'¥30',img:'',desc:'诚毅后花园！超大型园林博览园，各国园林风格齐聚，适合周末一日游，拍照超出片。'},
-      {name:'十里长堤',price:'免费',img:'images/shilichangdi.png',desc:'骑行15分钟到。傍晚在草坡上看日落听吉他，是诚毅学子最浪漫的课后活动。'},
-      {name:'海上自行车道',price:'免费',img:'',desc:'杏林湾上的海上自行车道，体验在海面上骑行，风景独特。'},
-    ],
-    shopping:[{name:'集美万达广场',desc:'诚毅最近的大型商圈，吃饭、看电影、逛街、KTV一站式。'},{name:'iOi MALL',desc:'新开的大型商场，品牌多环境好，诚毅学子周末新去处。'}],
-    nightlife:[{name:'星巢越中心',desc:'livehouse演出场地，经常有乐队巡演和独立音乐人表演，文艺青年聚集地。'},{name:'万达影城',desc:'IMAX影厅看大片，学生还有优惠场次。'}],
-    transport:'地铁1号线至集美大道站步行约10分钟。BRT快1线也可达。共享单车骑行15分钟到十里长堤。'
-  },
-  fuxingdong:{
-    name:'福东校区',sub:'同集南路',color:'#1a5c3a',pos:{x:35,y:65},badge:'福东',
-    food:[
-      {name:'阿鹭酸笋面',price:'¥15',rating:'⭐4.6',type:'闽南小吃',addr:'集源路集美学府SOHO附近',img:'images/suansunmian.png',review:'福东校区附近的人气小店，酸笋味浓郁，配料几十种自选，醋肉必加。分量十足价格实惠。','tags':['hot']},
-      {name:'大社阿发海蛎饼',price:'¥6',rating:'⭐4.5',type:'小吃',addr:'盛光路50-101号',img:'images/hailipng',review:'饱满的海蛎肉夹在脆皮饼里，一口下去海鲜汁水爆开，六个海蛎只要六块钱。','tags':['hot']},
-      {name:'联生老店',price:'¥15',rating:'⭐4.6',type:'闽南小炒',addr:'大社路128号',img:'images/lianshengchaomian.png',review:'从福东走过去15分钟，联生炒面是招牌，闽南碱面配虾仁肉片青菜，一份管饱。','tags':['rec']},
-    ],
-    attractions:[
-      {name:'集美大社',price:'免费',img:'',desc:'古村落里的红砖古厝和石板小巷，藏着最正宗的大社戏台沙茶面。步行15分钟可达。'},
-      {name:'南堤公园',price:'免费',img:'',desc:'临海绿地，适合傍晚散步看海，天气好时可以看到厦门岛的轮廓。'},
-    ],
-    shopping:[{name:'集源路商圈',desc:'周边生活配套齐全，超市、便利店、小餐馆日常所需全覆盖。'}],
-    nightlife:[],
-    transport:'BRT快1线可达。骑行到龙舟池约15分钟。周边公交线路多，进岛方便。'
-  },
-};
+// Data
+const CAMPUSES = {"hanghai": {"name": "航海学院", "area": "石鼓路核心区", "emoji": "🚢", "x": "72", "y": "52", "food": [{"name": "豪香嫩里脊肉串", "price": "¥4/串", "rating": "⭐4.6", "type": "小吃", "addr": "石鼓路32号", "img": "images/liji.png", "review": "石鼓路排队王！肉质超嫩，微辣调味刚刚好，现炸现卖4元一串性价比爆表。饭点排队15分钟起。", "tags": ["hot", "rec"]}, {"name": "印度飞饼", "price": "¥12", "rating": "⭐4.3", "type": "小吃", "addr": "石鼓路", "img": "images/feibing.png", "review": "排队最夸张的一家，但香气能飘半条街！刚出锅饼皮松软酥脆，推荐火腿鸡蛋口味。", "tags": ["hot"]}, {"name": "鸡动马达", "price": "¥10-25", "rating": "⭐4.5", "type": "炸物", "addr": "石鼓路30号", "img": "images/jidongmada.png", "review": "鸡柳+薯条+年糕三件套炸得金黄酥脆撒甘梅粉，大份才25元！年糕外酥里糯是灵魂。", "tags": ["hot", "rec"]}, {"name": "大阪烧", "price": "¥14", "rating": "⭐4.3", "type": "小吃", "addr": "石鼓路46-101号", "img": "images/dabanshao.png", "review": "大份又便宜，山海大阪烧分量足到惊人。酱汁浓郁、柴鱼花跳舞，趁热吃最佳。", "tags": ["rec"]}, {"name": "王记仙豆糕", "price": "¥18", "rating": "⭐4.5", "type": "甜品", "addr": "石鼓路", "img": "images/xiandougao.png", "review": "爆浆芝士紫薯味yyds！外皮金黄微焦，掰开奶酪拉丝，芋泥绵密香甜。趁热吃！", "tags": ["hot", "rec"]}, {"name": "帕帕烘焙栗酥饼", "price": "¥13", "rating": "⭐4.6", "type": "甜品", "addr": "石鼓路", "img": "images/lisubing.png", "review": "饼皮酥到掉渣，内馅软糯香甜。栗子和香芋两种口味，可单买可混拼，公认石鼓路甜品天花板。", "tags": ["hot", "rec"]}, {"name": "一树一叶", "price": "¥18", "rating": "⭐4.6", "type": "饮品", "addr": "石鼓路60-1号", "img": "images/naicha.png", "review": "厦门本土品牌，闽南青观音雪山必点！铁观音茶底配鲜奶，清爽不腻。凤梨青观音也推荐。", "tags": ["hot", "rec"]}, {"name": "欢喜说·皮蛋臭豆腐", "price": "¥10", "rating": "⭐4.7", "type": "小吃", "addr": "石鼓路", "img": "images/pidanchoudoufu.png", "review": "强推！外酥里嫩一口爆汁，加皮蛋+2元，黄瓜丝和酸甜泡菜搅拌后每块都裹满酱汁，绝了！", "tags": ["hot", "new"]}, {"name": "翔稷锅包肉", "price": "¥18", "rating": "⭐4.4", "type": "东北菜", "addr": "石鼓路", "img": "images/guobaorou.png", "review": "现炸现做酸甜酥脆，分量很足。吃多会有点腻但第一口绝对惊艳，东北同学认证好吃。", "tags": ["new"]}, {"name": "包浆豆腐", "price": "¥12", "rating": "⭐4.4", "type": "小吃", "addr": "石鼓路", "img": "images/baojiandoufu.png", "review": "外酥里嫩超级香！小份12元9个够吃了，配上泡菜简直绝配。不能吃辣要提前说。", "tags": ["new"]}, {"name": "片仔癀草甘蔗汁", "price": "¥15", "rating": "⭐4.5", "type": "饮品", "addr": "石鼓路", "img": "images/ganzhezhi.png", "review": "味道清甜不腻，降火解渴神器！用片仔癀草和甘蔗鲜榨，喝完喉咙超舒服。", "tags": ["new", "rec"]}, {"name": "江记花甲粉", "price": "¥15", "rating": "⭐4.5", "type": "小吃", "addr": "石鼓路26号", "img": "", "review": "石鼓路招牌花甲粉，锡纸煮出来超烫超香，花甲新鲜量多，两层楼都坐满人。加点辣更过瘾！", "tags": ["hot"]}, {"name": "锦记小吃·鸡蛋汉堡", "price": "¥8", "rating": "⭐4.5", "type": "小吃", "addr": "石鼓路", "img": "", "review": "肉馅超多还加了火腿、黄瓜丝、酸菜和萝卜干，一口下去大满足！早课前来一个刚好。", "tags": ["new"]}, {"name": "梅干菜故事", "price": "¥12", "rating": "⭐4.4", "type": "小吃", "addr": "石鼓路", "img": "images/kouroubing.png", "review": "排队也厉害的梅菜扣肉饼，现做现烤热气腾腾出锅，酥香浓郁。", "tags": ["new"]}, {"name": "童尾花嘎抛饭", "price": "¥22", "rating": "⭐4.5", "type": "东南亚", "addr": "石鼓路84-103号", "img": "images/dapaofan.png", "review": "藏在石鼓路小巷子里，随坐随吃热辣现炒。猪肉打抛饭饭张力十足，罗勒+辣炒肉沫+流心煎蛋的经典组合绝了！", "tags": ["new", "rec"]}, {"name": "老森咖喱", "price": "¥28", "rating": "⭐4.4", "type": "东南亚", "addr": "石鼓路15-3", "img": "images/laosencurry.png", "review": "复古风咖喱店，百香果咖喱和南瓜咖喱独特又好吃。环境适合约会拍照。", "tags": ["rec"]}, {"name": "逢甲冰店", "price": "¥20", "rating": "⭐4.4", "type": "甜品", "addr": "石鼓路", "img": "", "review": "台湾逢甲夜市的冰品风格，芒果冰和红豆牛奶冰超大一盆，夏天续命必备。", "tags": ["new"]}, {"name": "港仔小吃·章鱼小丸子", "price": "¥10", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路", "img": "", "review": "老夫妻经营的小店，章鱼小丸子饱满鲜香，真的有章鱼肉在里面！小心烫口。", "tags": ["new"]}, {"name": "老漳州麻糍", "price": "¥8", "rating": "⭐4.4", "type": "甜品", "addr": "塘埔路139-2号", "img": "images/maciicecream.png", "review": "漳州风味手工麻糍，外皮软糯内馅冰淇淋细腻丝滑。比杨府匠排队人少但味道不输。", "tags": ["new"]}, {"name": "老店烧烤", "price": "¥48", "rating": "⭐4.3", "type": "烧烤", "addr": "银亭路10-106号", "img": "", "review": "敬贤公园旁的老牌烧烤，白粿外皮酥有嚼劲特别推荐。开到凌晨2点，深夜撸串好去处。", "tags": ["new"]}, {"name": "红茶码头饮品店", "price": "¥15", "rating": "⭐4.5", "type": "饮品", "addr": "岑东路84-103号", "img": "", "review": "藏在岑东路的宝藏奶茶店！主打古早南洋风情，三色红茶奶味茶味都浓，价格不贵敞开了喝。", "tags": ["new"]}, {"name": "渝乡味·烤苕皮", "price": "¥10", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路46号", "img": "", "review": "重庆风味的烤苕皮，软糯Q弹，内馅丰富，酸萝卜和折耳根是灵魂。", "tags": ["new"]}, {"name": "饶记武汉热干面", "price": "¥12", "rating": "⭐4.1", "type": "面食", "addr": "石鼓路16-1号", "img": "", "review": "武汉人开的正宗热干面，麻酱香气浓郁，价格实惠。湖北同学说找到家乡味了。", "tags": ["new"]}], "attractions": [{"name": "石鼓路美食街", "price": "免费", "img": "images/shigulu.png", "desc": "集美学村最繁华的美食一条街，全长约800米，两旁遍布小吃店和饮品店。下午4点后开始热闹，晚上是最佳逛吃时间。"}, {"name": "龙舟池", "price": "免费", "img": "images/longzhouchipng.png", "desc": "集美标志性景点，池畔有闽南特色的亭子和嘉庚风格建筑群。端午有赛龙舟，晴天湖面倒映红砖建筑美到窒息。"}, {"name": "南薰楼群", "price": "免费", "img": "", "desc": "嘉庚建筑代表作，红砖砌筑中西合璧风格，集美最高建筑之一。二楼回廊是隐藏拍照机位，能拍到对称式建筑美学。"}], "shopping": [{"name": "石鼓路商业街", "desc": "小吃+服饰+杂货一应俱全，是集美学子日常逛街首选。"}], "nightlife": [{"name": "石鼓路夜市", "desc": "晚上9点后石鼓路变身夜市，烧烤摊、奶茶店亮起霓虹，烟火气十足。"}], "transport": "地铁集美学村站步行10分钟或骑行5分钟。石鼓路南北贯穿，全程步行约20分钟。"}, "lunji": {"name": "轮机工程学院", "area": "印斗路", "emoji": "⚓", "x": "55", "y": "38", "food": [{"name": "小刘印度飞饼", "price": "¥12", "rating": "⭐4.4", "type": "小吃", "addr": "印斗路", "img": "images/feibing.png", "review": "轮机学子最常光顾的飞饼摊，现场甩面表演就值回票价。推荐香蕉飞饼，外酥里甜。", "tags": ["rec"]}, {"name": "梅干菜扣肉饼", "price": "¥8", "rating": "⭐4.3", "type": "小吃", "addr": "印斗路", "img": "images/kouroubing.png", "review": "轮机后门的扣肉饼摊，烤得焦脆梅干菜味浓郁，老板脾气大但饼是真的好吃。", "tags": ["rec"]}, {"name": "阿龙沙嗲面", "price": "¥17", "rating": "⭐4.6", "type": "面食", "addr": "石鼓路202号", "img": "", "review": "沙嗲面是厦门灵魂美食！汤头浓郁微辣，配料自选。开到凌晨1点，轮机夜宵首选。", "tags": ["hot", "new"]}, {"name": "碗碗香面庄", "price": "¥13", "rating": "⭐4.1", "type": "面食", "addr": "印斗路28号", "img": "", "review": "就在轮机学院门口，价格亲民分量足。10元起吃饱，是真正的学生食堂级存在。", "tags": ["new"]}, {"name": "北北东北过桥米线", "price": "¥66", "rating": "⭐4.6", "type": "东北菜", "addr": "石鼓路145-117号", "img": "", "review": "评分超高的东北菜馆，过桥米线是招牌但烤肉才是隐藏王者。人均偏高但绝对值得。", "tags": ["new"]}, {"name": "山海味·闽菜现烹小馆", "price": "¥60", "rating": "⭐4.3", "type": "闽菜", "addr": "印斗路22号", "img": "", "review": "装修清新舒适，餐具精美讲究。就在音乐学院对面，适合请客聚餐。", "tags": ["new"]}], "attractions": [{"name": "敬贤公园", "price": "免费", "img": "", "desc": "轮机学院旁的小公园，傍晚夕阳很美，适合散步发呆。公园里还有篮球场和健身器材。"}], "shopping": [{"name": "印斗路小店", "desc": "学院门口便利店、打印店、水果店齐全，生活便利。"}], "nightlife": [{"name": "阿龙沙嗲面(深夜)", "desc": "开到1点，轮机学子的深夜面馆。"}, {"name": "老店烧烤", "desc": "敬贤公园旁，步行5分钟，白粿必点。"}], "transport": "地铁集美学村站步行约15分钟。门口有公交站「印斗路站」。"}, "dashu": {"name": "水产/科学馆校区", "area": "大社/嘉庚路", "emoji": "🐟", "x": "28", "y": "65", "food": [{"name": "奔水冬粉鸭", "price": "¥18", "rating": "⭐5.0", "type": "闽菜", "addr": "大社路", "img": "images/dongfenya.png", "review": "《夏至未至》取景地！鸭汤清澈鲜甜，鸭肉嫩滑鸭血弹牙，冬粉晶莹剔透。集美美食名片，必吃！", "tags": ["hot", "rec"]}, {"name": "大社戏台沙茶面", "price": "¥16", "rating": "⭐4.7", "type": "面食", "addr": "大社戏台旁", "img": "images/shachamian.png", "review": "《早餐中国》推荐！坐在戏台边吃面，沙茶汤浓郁花生香，鲜虾鱿鱼豆腐泡满满一碗。限量供应卖完收摊。", "tags": ["hot", "rec"]}, {"name": "联生老店", "price": "¥28", "rating": "⭐4.7", "type": "闽菜", "addr": "大社路128号", "img": "images/lianshengchaomian.png", "review": "百年老店！炒面软而不烂，配料鱿鱼白菜秘制肉。炒猪肝和糖醋里脊也是老客最爱。", "tags": ["hot", "rec"]}, {"name": "大社阿鹭酸笋面", "price": "¥15", "rating": "⭐4.6", "type": "小吃", "addr": "集源路", "img": "images/suansunmian.png", "review": "酸笋味霸气十足，几十种配料任选，醋肉是隐藏王牌。分量足味道好。", "tags": ["hot"]}, {"name": "海蛎饼", "price": "¥5", "rating": "⭐4.4", "type": "小吃", "addr": "大社路", "img": "images/hailipng", "review": "大社巷口的炸海蛎饼摊，外酥里嫩海蛎饱满，5元一个性价比炸裂。下午2点出摊。", "tags": ["rec"]}, {"name": "巷里·创意家常菜", "price": "¥77", "rating": "⭐4.7", "type": "闽菜", "addr": "尚南路170-101", "img": "images/xiangli.png", "review": "大社古厝里的创意闽菜，桂花酒酿豆花羹是招牌。拍照好看味道也在线，适合约会有格调。", "tags": ["hot", "rec"]}, {"name": "有时有泰·泰式料理", "price": "¥84", "rating": "⭐4.8", "type": "东南亚", "addr": "尚南路170-2号", "img": "images/youshiyoutai.png", "review": "大社最火的泰料！冬阴功汤用料新鲜，芒果糯米饭椰香浓郁。周末要排1小时。", "tags": ["hot", "new", "rec"]}, {"name": "GuduGudu面馆", "price": "¥49", "rating": "⭐4.3", "type": "面食", "addr": "尚南路180-1-102", "img": "images/gudugudu.png", "review": "日系治愈风面馆，番茄浓汤面配流心蛋绝了。店里还有一只很乖的猫店长。", "tags": ["new"]}, {"name": "叶太(大社店)", "price": "¥35", "rating": "⭐4.7", "type": "甜品", "addr": "大社戏台广场", "img": "", "review": "千层蛋糕可以排进厦门前三！开心果千层和伯爵红茶千层必点。大社戏台旁的文艺甜品店。", "tags": ["hot", "new"]}, {"name": "是秋·有茶食", "price": "¥40", "rating": "⭐4.5", "type": "茶饮", "addr": "大社", "img": "", "review": "古厝老院里的中式茶食，坐在天井喝茶吃点心，闽南韵味十足。适合闺蜜下午茶。", "tags": ["new"]}], "attractions": [{"name": "集美大社", "price": "免费", "img": "", "desc": "闽南传统古村落，红砖古厝和石板小巷保留着原汁原味的闽南风情。文创小店、壁画墙遍布，是拍照和觅食的双重宝地。"}, {"name": "嘉庚公园+鳌园", "price": "免费", "img": "", "desc": "纪念陈嘉庚先生的园林公园，鳌园石雕是一绝。环境清幽，傍晚散步看夕阳极佳。周一纪念馆闭馆。"}, {"name": "归来堂", "price": "免费", "img": "", "desc": "陈嘉庚故居，闽南红砖厝混搭西洋拱廊。了解华侨历史的好去处。"}], "shopping": [{"name": "大社文创小店", "desc": "古厝改造的文创店、咖啡馆和手作工作室，文艺气息浓厚。"}], "nightlife": [{"name": "大社古厝茶室", "desc": "夜晚坐在古厝天井喝茶聊天，闽南韵味十足。"}], "transport": "地铁集美学村站步行约20分钟或骑行8分钟。大社区域适合步行探索，钻进巷子会有惊喜。"}, "caimao": {"name": "财经/师范/音乐学院", "area": "石鼓路南段/集岑路", "emoji": "🎵", "x": "40", "y": "78", "food": [{"name": "奔水冬粉鸭(分店)", "price": "¥18", "rating": "⭐5.0", "type": "闽菜", "addr": "集岑路", "img": "images/dongfenya.png", "review": "财经学院最近的冬粉鸭分店，味道和总店一致。饭点也要排队。", "tags": ["rec"]}, {"name": "柠檬茶(1000cc)", "price": "¥16", "rating": "⭐4.5", "type": "饮品", "addr": "塘埔路", "img": "images/ningmengcha.png", "review": "古早味1000cc超大杯柠檬茶，只要16元！冰镇解暑神器，逛石鼓路标配饮品。", "tags": ["rec", "hot"]}, {"name": "现榨玉米汁", "price": "¥10", "rating": "⭐4.4", "type": "饮品", "addr": "塘埔路", "img": "images/yumizhi.png", "review": "鲜榨玉米汁浓稠香甜，10元一大杯。冬天热饮夏天冰饮，比奶茶健康多了。", "tags": ["rec"]}, {"name": "炒泡面(黑胡椒)", "price": "¥12", "rating": "⭐4.3", "type": "小吃", "addr": "集岑路", "img": "images/chaopaomian.png", "review": "黑胡椒炒泡面锅气十足，面条劲道配火腿蛋，深夜食堂的感觉。12元吃撑。", "tags": ["rec"]}, {"name": "杨府匠麻糍", "price": "¥8", "rating": "⭐4.5", "type": "甜品", "addr": "塘埔路139-22号", "img": "images/yangfujiangmaci.png", "review": "陈星旭和大表哥都来打卡！麻糍现点现做，冰淇淋内馅+芋泥+脆脆三重口感。卖光就打烊，赶早！", "tags": ["hot", "rec"]}, {"name": "熊阿熊西瓜碎奶·福伯烧仙草", "price": "¥13", "rating": "⭐4.6", "type": "饮品", "addr": "集岑路1-82号", "img": "images/xiguasuinai.png", "review": "夏天必喝的西瓜碎奶，烧仙草也是招牌，消暑解渴第一名。", "tags": ["rec", "new"]}, {"name": "白勺食悟", "price": "¥40", "rating": "⭐4.5", "type": "轻食", "addr": "财经学院巷子里", "img": "", "review": "复古风格轻食店，白色+原木色调，芝士树莓蛋糕必点。环境安静适合一个人发呆或自习。", "tags": ["new"]}, {"name": "刘文祥麻辣烫", "price": "¥21", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路194号", "img": "", "review": "音乐学院学生推荐！老式麻辣烫的味道，汤底浓郁配菜自选，价格实惠。", "tags": ["new"]}, {"name": "补·药膳·酒居", "price": "¥35", "rating": "⭐4.3", "type": "药膳", "addr": "岑东路58-102", "img": "images/buyaoshan.png", "review": "四物老鸭汤是招牌，汤色金黄药材味浓，一份下去整个人都暖了。当归羊肉煲也推荐。", "tags": ["new"]}, {"name": "喜旺梨台湾菜", "price": "¥76", "rating": "⭐4.7", "type": "台湾菜", "addr": "石鼓路166-111", "img": "images/xiwangli.png", "review": "台式三杯鸡和卤肉饭超正宗！太阳蛋配卤肉饭是灵魂，台湾同学说找到家了。", "tags": ["new", "rec"]}, {"name": "重庆铺盖面", "price": "¥12", "rating": "⭐4.3", "type": "面食", "addr": "盛光路13-5号", "img": "images/pugaimian.png", "review": "宽大的手工铺盖面浇上浓郁杂酱，花椒味够劲。重庆同学认证，说比学校食堂好吃一百倍。", "tags": ["new"]}, {"name": "别豆糖水铺", "price": "¥15", "rating": "⭐4.3", "type": "甜品", "addr": "集岑路", "img": "", "review": "广式糖水铺，红豆沙、绿豆沙、双皮奶经典好味。夏天来一碗冰镇红豆沙绝了。", "tags": ["new"]}, {"name": "鑫坞堂姜母鸭", "price": "¥60", "rating": "⭐4.1", "type": "闽菜", "addr": "集岑路1-81号", "img": "images/jiangmuya.png", "review": "厦门名片级美食，鸭肉加姜片砂锅慢炖，姜香浓郁鸭肉酥烂。适合2-3人聚餐。", "tags": ["rec"]}, {"name": "need创意韩式料理", "price": "¥75", "rating": "⭐4.5", "type": "韩料", "addr": "石鼓路88号", "img": "", "review": "岛外口碑最高的平价韩料！韩式辣鸡爪和部队火锅必点，芝士年糕也是招牌。学生党友好。", "tags": ["new", "rec"]}, {"name": "初心甜点铺", "price": "¥25", "rating": "⭐4.5", "type": "甜品", "addr": "石鼓路", "img": "", "review": "一对情侣开的提拉米苏专门店，口感绵密咖啡味浓郁。适合约会的小甜点。", "tags": ["new"]}, {"name": "雪克烧仙草", "price": "¥10", "rating": "⭐4.3", "type": "饮品", "addr": "龙舟池旁", "img": "", "review": "龙舟池附近的古早味烧仙草，配料丰富价格实惠，是集美学子从小喝到大的味道。", "tags": ["new"]}], "attractions": [{"name": "楚雨荨家", "price": "免费", "img": "", "desc": "导航「集岑路7号」，《一起来看流星雨》取景地。楚雨荨的家就在这，怀旧打卡必到。"}, {"name": "道南楼", "price": "免费", "img": "", "desc": "集美中学教学楼，朱红色建筑超有feel。连廊光影和对称式建筑是拍照绝佳机位。"}], "shopping": [{"name": "集岑路/塘埔路", "desc": "学生生活区，各种小吃、奶茶、杂货店密集。"}], "nightlife": [{"name": "塘埔路夜市", "desc": "西海夜市中段，晚上各种小吃摊出摊，烟火气浓。"}, {"name": "嘟小牛烤肉(深夜)", "desc": "韩式大排档烤肉开到凌晨1点，学生党深夜聚餐圣地。"}], "transport": "地铁集美学村站步行约15分钟。财经学院和师范学院挨着，步行5分钟互通。"}, "chengyi": {"name": "诚毅学院", "area": "集美大道/万达商圈", "emoji": "🎓", "x": "85", "y": "30", "food": [{"name": "三胖东北烤肉", "price": "¥55", "rating": "⭐4.6", "type": "烤肉", "addr": "集美万达金街", "img": "images/dongbeikaorou.png", "review": "平价又好吃的东北烤肉，五花肉腌制入味，搭配酸菜绝了！学生聚餐人气王。", "tags": ["hot", "rec"]}, {"name": "鑫坞堂姜母鸭(诚毅店)", "price": "¥60", "rating": "⭐4.2", "type": "闽菜", "addr": "诚毅学院附近", "img": "images/jiangmuya.png", "review": "厦门名片级美食，鸭肉在砂锅里和姜片慢炖到酥烂。冬天吃一锅整个人都暖了。", "tags": ["rec"]}, {"name": "小鱼号酸菜鱼", "price": "¥24", "rating": "⭐4.1", "type": "川菜", "addr": "诚毅学院附近", "img": "images/suancaiyu.png", "review": "招牌柠檬酸汤无骨鱼，酸爽开胃价格亲民，单人份也能吃得很满足。", "tags": ["new"]}, {"name": "片皮鸭", "price": "¥20", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路30-101号", "img": "images/pianpiya.png", "review": "物美价廉的北京风味烤鸭卷，饼薄肉多酱香。来一份边走边吃刚刚好。", "tags": ["rec"]}, {"name": "噗通·汤咖喱", "price": "¥46", "rating": "⭐4.6", "type": "日料", "addr": "兑山西路118-203", "img": "images/putongcurry.png", "review": "日式汤咖喱专门店！猪排汤咖喱配秋葵玉米莲藕西兰花和溏心蛋，温暖治愈。华大附近的人气店。", "tags": ["new", "rec"]}, {"name": "嘟小牛烤肉", "price": "¥60", "rating": "⭐4.4", "type": "韩料", "addr": "乐安东路6-5号", "img": "", "review": "韩式大排档风格烤肉，店员帮烤解放双手。菠萝小鲜肉和肥牛包汉堡绝了，开到凌晨1点。", "tags": ["new"]}, {"name": "熊姐大排档", "price": "¥40", "rating": "⭐4.3", "type": "大排档", "addr": "孙厝乐安东里5号104", "img": "", "review": "孙厝的人气大排档，烤田鸡和蒜香排骨是招牌！路边摊风格烟火气十足，人均40吃到撑。", "tags": ["new"]}, {"name": "银亭海鲜大排档", "price": "¥76", "rating": "⭐4.3", "type": "海鲜", "addr": "银江路122号", "img": "", "review": "地道厦门味大排档，招牌手工海鲜卷必点。开到凌晨2点，诚毅学子深夜食堂。", "tags": ["new"]}, {"name": "集膳斑斓·海鲜私厨", "price": "¥99", "rating": "⭐4.8", "type": "海鲜", "addr": "银江路132-3号", "img": "", "review": "评分4.8的集美最高分餐厅！清新复古蓝基调，海鲜新鲜精致。适合重要聚餐和约会。", "tags": ["hot", "new"]}, {"name": "北疆饭店", "price": "¥65", "rating": "⭐4.3", "type": "新疆菜", "addr": "银江路236-101号", "img": "", "review": "孙厝的新疆风味，烤全羊是招牌。大盘鸡和羊肉串也很地道，偶尔换换口味的好选择。", "tags": ["new"]}, {"name": "笨姐居民楼火锅", "price": "¥73", "rating": "⭐4.3", "type": "火锅", "addr": "银亭路8-103号", "img": "", "review": "藏在居民楼里的重庆火锅，锅底够辣够劲。环境朴素但味道不朴素，性价比高。", "tags": ["new"]}], "attractions": [{"name": "十里长堤", "price": "免费", "img": "images/shilichangdi.png", "desc": "集美最浪漫的日落观赏地！傍晚海上列车+日落+草坪音乐会，年轻人围坐听歌聊天。穿拖鞋可以下滩涂捡贝壳找螃蟹。"}, {"name": "集美万达广场", "price": "免费", "img": "", "desc": "集美最大的购物中心，万达影城、沃尔玛、各种品牌餐饮齐全。金街是美食和娱乐的集中地。"}, {"name": "南堤公园", "price": "免费", "img": "", "desc": "龙舟池附近的滨海公园，散步画画赏美景。傍晚看集美大桥日落非常美。"}], "shopping": [{"name": "集美万达广场", "desc": "集美最大商业体，影城+沃尔玛+品牌餐饮+服饰一应俱全。"}, {"name": "iOi MALL", "desc": "世茂广场旁的商场，UNIQLO、喜茶、海底捞都在这里。"}, {"name": "世茂广场", "desc": "新兴商业体，有Meland儿童乐园和各种餐饮品牌。"}], "nightlife": [{"name": "星巢越中心", "desc": "厦门知名Livehouse，经常有乐队演出和音乐活动。"}, {"name": "十里长堤夜间音乐会", "desc": "晚上草坪上经常有街头歌手弹唱，氛围感拉满。"}, {"name": "集美万达影城", "desc": "IMAX厅看大片，学生票有优惠。"}], "transport": "地铁1号线集美学村站/官任站均可到达。BRT诚毅学院站直达。骑行是校内最方便的交通方式。"}, "huada": {"name": "华侨大学(万科云城)", "area": "兑山/万科云城", "emoji": "🏫", "x": "92", "y": "45", "food": [{"name": "chimoto琦摩", "price": "¥45", "rating": "⭐4.5", "type": "日料", "addr": "万科云城", "img": "", "review": "主打抹茶甜品的平价日料店，好看又好吃。抹茶冰淇淋和抹茶千层是招牌。", "tags": ["new", "rec"]}, {"name": "入野食屋", "price": "¥40", "rating": "⭐4.4", "type": "日料", "addr": "万科云城", "img": "", "review": "平价日式定食，牛舌饭和炸猪排定食性价比高。环境温馨适合一人食。", "tags": ["new"]}, {"name": "禾味町日本料理", "price": "¥70", "rating": "⭐4.5", "type": "日料", "addr": "龙荷二里11-111号", "img": "", "review": "浓郁的日式居酒屋氛围，还提供和服换装！寿喜锅和刺身拼盘精致美味，高性价比。", "tags": ["new"]}, {"name": "韩江韩国料理", "price": "¥65", "rating": "⭐4.4", "type": "韩料", "addr": "万科云城", "img": "", "review": "环境颜值在线口味不甜腻！岩板肥牛+山葵绝了，星星炸鸡用大鸡翅超入味。部队锅料很足。", "tags": ["new", "rec"]}, {"name": "深夜食堂见世", "price": "¥40", "rating": "⭐4.3", "type": "日料", "addr": "万科云城", "img": "", "review": "日式居酒屋风格，各类烤串和小食。营业到深夜，是万科云城的深夜食堂。", "tags": ["new"]}, {"name": "宇宙治茶", "price": "¥18", "rating": "⭐4.4", "type": "饮品", "addr": "万科云城", "img": "", "review": "厦门本土奶茶品牌，各种奶茶果茶饮品。茉莉奶白是福建首家旗舰店。", "tags": ["new"]}, {"name": "傲掌门铜炉蛙锅", "price": "¥70", "rating": "⭐4.3", "type": "火锅", "addr": "万科云城", "img": "", "review": "铜炉蛙锅肉多，汤汁拌饭香。还有肉蟹煲，自助冰粉和水果。", "tags": ["new"]}, {"name": "遇见楼兰", "price": "¥55", "rating": "⭐4.2", "type": "新疆菜", "addr": "万科云城", "img": "", "review": "新疆风味大盘鸡和羊肉串超香，分量大到惊人。少数民族同学说很地道。", "tags": ["new"]}], "attractions": [{"name": "万科云城", "price": "免费", "img": "", "desc": "集美新兴的年轻人聚集地，餐饮、购物、娱乐一体化。各种网红餐厅和奶茶店密集分布。"}, {"name": "园博苑", "price": "¥60", "img": "", "desc": "厦门大型园林博览苑，中华教育岛、国际园区等。春天百花盛开尤其美，适合周末一日游。"}], "shopping": [{"name": "万科云城商业街", "desc": "年轻化商业街区，餐饮娱乐为主。"}], "nightlife": [{"name": "Beer Barn", "desc": "精酿啤酒+下酒小食，年轻人聚集地。"}, {"name": "维纳多精酿餐吧", "desc": "精酿啤酒种类丰富，配小食超赞。"}, {"name": "Aommo·日咖夜酒", "desc": "白天咖啡晚上酒吧，万科云城的生活方式。"}], "transport": "BRT华侨大学站。地铁1号线官任站步行约15分钟。共享单车是区域内的最佳选择。"}, "gongxiao": {"name": "供销社/集美供街区", "area": "银江路/集源路", "emoji": "🏪", "x": "60", "y": "72", "food": [{"name": "供销茶咖", "price": "¥20", "rating": "⭐4.5", "type": "咖啡", "addr": "集美供销社街区", "img": "", "review": "供销社和咖啡的神奇结合！白天是大学生校外自习室，晚上变身酒吧'早C晚A'。价格友好环境超棒。", "tags": ["new", "rec"]}, {"name": "李树枝茶室", "price": "¥35", "rating": "⭐4.6", "type": "茶饮", "addr": "集美大社附近", "img": "", "review": "很舒服的茶馆，茶叶品质讲究，环境安静雅致。适合约朋友坐下来慢慢喝茶聊天。", "tags": ["new"]}, {"name": "Nomi半岛", "price": "¥35", "rating": "⭐4.5", "type": "咖啡", "addr": "集美学村", "img": "", "review": "白敬亭都来打卡的咖啡馆！环境极好适合拍照，咖啡和轻食出品稳定。", "tags": "new"}, {"name": "路明咖啡", "price": "¥25", "rating": "⭐4.4", "type": "咖啡", "addr": "集美", "img": "", "review": "老牌咖啡店，手冲和意式都很专业。很多集大学子在这里写论文泡一天。", "tags": "new"}], "attractions": [{"name": "集美供销社街区", "price": "免费", "img": "", "desc": "供销社老建筑改造的潮流街区，复古绿主色调。供销公园+供销茶咖+邻里市集，集美新晋网红打卡地。"}, {"name": "集美学村大门", "price": "免费", "img": "", "desc": "集美学村正门，嘉庚风格牌坊。拍照打卡第一站。"}], "shopping": [{"name": "供销社文创街区", "desc": "复古+潮流混搭，文创产品、咖啡面包、邻里市集。"}], "nightlife": [{"name": "供销茶咖(夜间酒吧)", "desc": "晚上灯光调暗变酒吧，微醺氛围。大学生'早C晚A'热门去处。"}], "transport": "地铁集美学村站步行5分钟。毗邻集美大学主校区和万达广场。"}};
 
-const ROUTE = [
-  {time:'09:00',title:'龙舟池 · 清晨散步',desc:'从龙舟池开始一天。清晨的池水如镜，嘉庚建筑倒映其中。沿着池畔走一圈，拍几张美照，感受集美学村的宁静。步行至大社。'},
-  {time:'10:00',title:'大社 · 古村探索',desc:'钻进大社的闽南古厝，看红砖墙、石板路和壁画墙。先去大社戏台旁吃一碗沙茶面（¥16），再到联生老店来一份炒面（¥15），最后阿发海蛎饼收尾（¥6）。'},
-  {time:'12:00',title:'石鼓路 · 午餐扫街',desc:'沿着石鼓路从南往北：小刘印度飞饼（¥13）→ 豪香嫩里脊肉串（¥4/串×3=¥12）→ 大阪烧（¥14）→ 鸡动马达（¥10），最后喝杯一树一叶奶茶（¥18）解腻。'},
-  {time:'14:00',title:'嘉庚公园 · 文化之旅',desc:'步行前往嘉庚公园和鳌园，了解陈嘉庚生平事迹，欣赏精美的石雕艺术。鳌园的石刻"诸葛亮前出师表"是隐藏宝藏。'},
-  {time:'16:00',title:'万达广场 · 逛街歇脚',desc:'骑共享单车到集美万达广场。逛逛商场吹空调，或者去万达金街找下午茶。推荐森山仙草来碗烧仙草（¥19），清凉解暑。'},
-  {time:'17:30',title:'十里长堤 · 最美日落',desc:'傍晚前赶到十里长堤占个好位置。橙色晚霞洒满海面，远处跨海大桥做背景，草地上年轻人弹吉他唱歌。这是集美最美的一刻，必须打卡！'},
-  {time:'19:00',title:'石鼓路 · 晚餐+夜市',desc:'晚餐回石鼓路吃正餐：三胖家东北烤肉（人均¥50）或老森咖喱（¥28）。饭后逛夜市，烤苕皮、梅干菜饼、漳州麻糍继续嗨。'},
-  {time:'21:00',title:'十里长堤/星巢 · 夜生活',desc:'想看Livehouse去星巢越中心，想听街头弹唱回十里长堤。坐在草地上吹海风听歌，这才是集美大学生活的正确打开方式。'},
-];
+const SEARCH_DATA = [{"t": "food", "name": "豪香嫩里脊肉串", "price": "¥4/串", "rating": "⭐4.6", "type": "小吃", "addr": "石鼓路32号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "印度飞饼", "price": "¥12", "rating": "⭐4.3", "type": "小吃", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "鸡动马达", "price": "¥10-25", "rating": "⭐4.5", "type": "炸物", "addr": "石鼓路30号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "大阪烧", "price": "¥14", "rating": "⭐4.3", "type": "小吃", "addr": "石鼓路46-101号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "王记仙豆糕", "price": "¥18", "rating": "⭐4.5", "type": "甜品", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "帕帕烘焙栗酥饼", "price": "¥13", "rating": "⭐4.6", "type": "甜品", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "一树一叶", "price": "¥18", "rating": "⭐4.6", "type": "饮品", "addr": "石鼓路60-1号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "欢喜说·皮蛋臭豆腐", "price": "¥10", "rating": "⭐4.7", "type": "小吃", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "翔稷锅包肉", "price": "¥18", "rating": "⭐4.4", "type": "东北菜", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "包浆豆腐", "price": "¥12", "rating": "⭐4.4", "type": "小吃", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "片仔癀草甘蔗汁", "price": "¥15", "rating": "⭐4.5", "type": "饮品", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "江记花甲粉", "price": "¥15", "rating": "⭐4.5", "type": "小吃", "addr": "石鼓路26号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "锦记小吃·鸡蛋汉堡", "price": "¥8", "rating": "⭐4.5", "type": "小吃", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "梅干菜故事", "price": "¥12", "rating": "⭐4.4", "type": "小吃", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "童尾花嘎抛饭", "price": "¥22", "rating": "⭐4.5", "type": "东南亚", "addr": "石鼓路84-103号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "老森咖喱", "price": "¥28", "rating": "⭐4.4", "type": "东南亚", "addr": "石鼓路15-3", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "逢甲冰店", "price": "¥20", "rating": "⭐4.4", "type": "甜品", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "港仔小吃·章鱼小丸子", "price": "¥10", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "老漳州麻糍", "price": "¥8", "rating": "⭐4.4", "type": "甜品", "addr": "塘埔路139-2号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "老店烧烤", "price": "¥48", "rating": "⭐4.3", "type": "烧烤", "addr": "银亭路10-106号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "红茶码头饮品店", "price": "¥15", "rating": "⭐4.5", "type": "饮品", "addr": "岑东路84-103号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "渝乡味·烤苕皮", "price": "¥10", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路46号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "饶记武汉热干面", "price": "¥12", "rating": "⭐4.1", "type": "面食", "addr": "石鼓路16-1号", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "food", "name": "小刘印度飞饼", "price": "¥12", "rating": "⭐4.4", "type": "小吃", "addr": "印斗路", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "food", "name": "梅干菜扣肉饼", "price": "¥8", "rating": "⭐4.3", "type": "小吃", "addr": "印斗路", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "food", "name": "阿龙沙嗲面", "price": "¥17", "rating": "⭐4.6", "type": "面食", "addr": "石鼓路202号", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "food", "name": "碗碗香面庄", "price": "¥13", "rating": "⭐4.1", "type": "面食", "addr": "印斗路28号", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "food", "name": "北北东北过桥米线", "price": "¥66", "rating": "⭐4.6", "type": "东北菜", "addr": "石鼓路145-117号", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "food", "name": "山海味·闽菜现烹小馆", "price": "¥60", "rating": "⭐4.3", "type": "闽菜", "addr": "印斗路22号", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "food", "name": "奔水冬粉鸭", "price": "¥18", "rating": "⭐5.0", "type": "闽菜", "addr": "大社路", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "大社戏台沙茶面", "price": "¥16", "rating": "⭐4.7", "type": "面食", "addr": "大社戏台旁", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "联生老店", "price": "¥28", "rating": "⭐4.7", "type": "闽菜", "addr": "大社路128号", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "大社阿鹭酸笋面", "price": "¥15", "rating": "⭐4.6", "type": "小吃", "addr": "集源路", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "海蛎饼", "price": "¥5", "rating": "⭐4.4", "type": "小吃", "addr": "大社路", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "巷里·创意家常菜", "price": "¥77", "rating": "⭐4.7", "type": "闽菜", "addr": "尚南路170-101", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "有时有泰·泰式料理", "price": "¥84", "rating": "⭐4.8", "type": "东南亚", "addr": "尚南路170-2号", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "GuduGudu面馆", "price": "¥49", "rating": "⭐4.3", "type": "面食", "addr": "尚南路180-1-102", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "叶太(大社店)", "price": "¥35", "rating": "⭐4.7", "type": "甜品", "addr": "大社戏台广场", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "是秋·有茶食", "price": "¥40", "rating": "⭐4.5", "type": "茶饮", "addr": "大社", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "food", "name": "奔水冬粉鸭(分店)", "price": "¥18", "rating": "⭐5.0", "type": "闽菜", "addr": "集岑路", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "柠檬茶(1000cc)", "price": "¥16", "rating": "⭐4.5", "type": "饮品", "addr": "塘埔路", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "现榨玉米汁", "price": "¥10", "rating": "⭐4.4", "type": "饮品", "addr": "塘埔路", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "炒泡面(黑胡椒)", "price": "¥12", "rating": "⭐4.3", "type": "小吃", "addr": "集岑路", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "杨府匠麻糍", "price": "¥8", "rating": "⭐4.5", "type": "甜品", "addr": "塘埔路139-22号", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "熊阿熊西瓜碎奶·福伯烧仙草", "price": "¥13", "rating": "⭐4.6", "type": "饮品", "addr": "集岑路1-82号", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "白勺食悟", "price": "¥40", "rating": "⭐4.5", "type": "轻食", "addr": "财经学院巷子里", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "刘文祥麻辣烫", "price": "¥21", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路194号", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "补·药膳·酒居", "price": "¥35", "rating": "⭐4.3", "type": "药膳", "addr": "岑东路58-102", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "喜旺梨台湾菜", "price": "¥76", "rating": "⭐4.7", "type": "台湾菜", "addr": "石鼓路166-111", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "重庆铺盖面", "price": "¥12", "rating": "⭐4.3", "type": "面食", "addr": "盛光路13-5号", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "别豆糖水铺", "price": "¥15", "rating": "⭐4.3", "type": "甜品", "addr": "集岑路", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "鑫坞堂姜母鸭", "price": "¥60", "rating": "⭐4.1", "type": "闽菜", "addr": "集岑路1-81号", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "need创意韩式料理", "price": "¥75", "rating": "⭐4.5", "type": "韩料", "addr": "石鼓路88号", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "初心甜点铺", "price": "¥25", "rating": "⭐4.5", "type": "甜品", "addr": "石鼓路", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "雪克烧仙草", "price": "¥10", "rating": "⭐4.3", "type": "饮品", "addr": "龙舟池旁", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "food", "name": "三胖东北烤肉", "price": "¥55", "rating": "⭐4.6", "type": "烤肉", "addr": "集美万达金街", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "鑫坞堂姜母鸭(诚毅店)", "price": "¥60", "rating": "⭐4.2", "type": "闽菜", "addr": "诚毅学院附近", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "小鱼号酸菜鱼", "price": "¥24", "rating": "⭐4.1", "type": "川菜", "addr": "诚毅学院附近", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "片皮鸭", "price": "¥20", "rating": "⭐4.2", "type": "小吃", "addr": "石鼓路30-101号", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "噗通·汤咖喱", "price": "¥46", "rating": "⭐4.6", "type": "日料", "addr": "兑山西路118-203", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "嘟小牛烤肉", "price": "¥60", "rating": "⭐4.4", "type": "韩料", "addr": "乐安东路6-5号", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "熊姐大排档", "price": "¥40", "rating": "⭐4.3", "type": "大排档", "addr": "孙厝乐安东里5号104", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "银亭海鲜大排档", "price": "¥76", "rating": "⭐4.3", "type": "海鲜", "addr": "银江路122号", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "集膳斑斓·海鲜私厨", "price": "¥99", "rating": "⭐4.8", "type": "海鲜", "addr": "银江路132-3号", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "北疆饭店", "price": "¥65", "rating": "⭐4.3", "type": "新疆菜", "addr": "银江路236-101号", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "笨姐居民楼火锅", "price": "¥73", "rating": "⭐4.3", "type": "火锅", "addr": "银亭路8-103号", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "food", "name": "chimoto琦摩", "price": "¥45", "rating": "⭐4.5", "type": "日料", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "入野食屋", "price": "¥40", "rating": "⭐4.4", "type": "日料", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "禾味町日本料理", "price": "¥70", "rating": "⭐4.5", "type": "日料", "addr": "龙荷二里11-111号", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "韩江韩国料理", "price": "¥65", "rating": "⭐4.4", "type": "韩料", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "深夜食堂见世", "price": "¥40", "rating": "⭐4.3", "type": "日料", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "宇宙治茶", "price": "¥18", "rating": "⭐4.4", "type": "饮品", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "傲掌门铜炉蛙锅", "price": "¥70", "rating": "⭐4.3", "type": "火锅", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "遇见楼兰", "price": "¥55", "rating": "⭐4.2", "type": "新疆菜", "addr": "万科云城", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "food", "name": "供销茶咖", "price": "¥20", "rating": "⭐4.5", "type": "咖啡", "addr": "集美供销社街区", "campusId": "gongxiao", "campusName": "供销社/集美供街区", "emoji": "🏪"}, {"t": "food", "name": "李树枝茶室", "price": "¥35", "rating": "⭐4.6", "type": "茶饮", "addr": "集美大社附近", "campusId": "gongxiao", "campusName": "供销社/集美供街区", "emoji": "🏪"}, {"t": "food", "name": "Nomi半岛", "price": "¥35", "rating": "⭐4.5", "type": "咖啡", "addr": "集美学村", "campusId": "gongxiao", "campusName": "供销社/集美供街区", "emoji": "🏪"}, {"t": "food", "name": "路明咖啡", "price": "¥25", "rating": "⭐4.4", "type": "咖啡", "addr": "集美", "campusId": "gongxiao", "campusName": "供销社/集美供街区", "emoji": "🏪"}, {"t": "attr", "name": "石鼓路美食街", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "attr", "name": "龙舟池", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "attr", "name": "南薰楼群", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "hanghai", "campusName": "航海学院", "emoji": "🚢"}, {"t": "attr", "name": "敬贤公园", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "lunji", "campusName": "轮机工程学院", "emoji": "⚓"}, {"t": "attr", "name": "集美大社", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "attr", "name": "嘉庚公园+鳌园", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "attr", "name": "归来堂", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "dashu", "campusName": "水产/科学馆校区", "emoji": "🐟"}, {"t": "attr", "name": "楚雨荨家", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "attr", "name": "道南楼", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "caimao", "campusName": "财经/师范/音乐学院", "emoji": "🎵"}, {"t": "attr", "name": "十里长堤", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "attr", "name": "集美万达广场", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "attr", "name": "南堤公园", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "chengyi", "campusName": "诚毅学院", "emoji": "🎓"}, {"t": "attr", "name": "万科云城", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "attr", "name": "园博苑", "price": "¥60", "rating": "", "type": "景点", "addr": "", "campusId": "huada", "campusName": "华侨大学(万科云城)", "emoji": "🏫"}, {"t": "attr", "name": "集美供销社街区", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "gongxiao", "campusName": "供销社/集美供街区", "emoji": "🏪"}, {"t": "attr", "name": "集美学村大门", "price": "免费", "rating": "", "type": "景点", "addr": "", "campusId": "gongxiao", "campusName": "供销社/集美供街区", "emoji": "🏪"}];
 
-const TOP10 = [
-  CAMPUSES.dashu.food[0],  // 大社戏台沙茶面
-  CAMPUSES.dashu.food[6],  // 巷里·创意家常菜
-  CAMPUSES.zhu.food[0],    // 奔水冬粉鸭
-  CAMPUSES.hanghai.food[2],// 豪香嫩里脊肉串
-  CAMPUSES.dashu.food[8],  // 重庆铺盖面
-  CAMPUSES.shifan.food[5], // 喜旺梨台湾菜
-  {name:'噗通·汤咖喱(华大店)',price:'¥46',rating:'⭐4.6',type:'日式咖喱',addr:'兑山西路118-203号',img:'images/putongcurry.png',review:'诚毅排队王！汤咖喱清爽鲜美先喝汤后泡饭，招牌猪排厚实酥脆，溏心蛋一绝。',campusKey:'chengyi'},
-  CAMPUSES.dashu.food[7],  // GuduGudu·面馆
-  CAMPUSES.hanghai.food[0],// 一树一叶
-  CAMPUSES.dashu.food[5],  // 有时有泰
-];
-
-// ============ RENDER MAP ============
-const map = document.getElementById('map');
-const campusBtns = document.getElementById('campusBtns');
-const campusKeys = ['zhu','hanghai','lunjin','caimao','dashu','shifan','meishu','chengyi','fuxingdong'];
-
-const COLORS = {zhu:'#e85d3a',hanghai:'#3a6fb5',lunjin:'#3a6fb5',caimao:'#e85d3a',dashu:'#e85d3a',shifan:'#e85d3a',meishu:'#e85d3a',chengyi:'#1a5c3a',fuxingdong:'#1a5c3a'};
-
-campusKeys.forEach(key=>{
-  const c = CAMPUSES[key];
-  // Map marker
-  const m = document.createElement('div');
-  m.className='marker';
-  m.style.cssText=`left:${c.pos.x}%;top:${c.pos.y}%`;
-  m.innerHTML=`<div class="marker-dot" style="background:${c.color}">${c.badge}</div><div class="marker-name">${c.name.replace(/（.*/,'')}</div>`;
-  m.onclick=()=>openCampus(key);
-  map.appendChild(m);
-
-  // Mobile button
-  const btn = document.createElement('button');
-  btn.className='campus-btn';
-  btn.style.color=c.color;
-  btn.style.borderColor=c.color+'33';
-  btn.innerHTML=`<span class="icon">${c.badge==='本部'?'🏫':c.badge==='航海'?'⚓':c.badge==='轮机'?'🔧':c.badge==='财经'?'💰':c.badge==='大社'?'🏘️':c.badge==='师范'?'📚':c.badge==='美院'?'🎨':c.badge==='诚毅'?'🦁':c.badge==='福东'?'🏠':''}</span>${c.name}`;
-  btn.onclick=()=>{openCampus(key);document.getElementById('map-area').scrollIntoView({behavior:'smooth'});};
-  campusBtns.appendChild(btn);
-});
-
-// ============ MODAL ============
-let currentTab = 'food';
-let currentCampus = null;
-
-function openCampus(key){
-  currentCampus = key;
-  const c = CAMPUSES[key];
-  document.getElementById('modalTitle').textContent = c.name;
-  document.getElementById('modalSub').textContent = c.sub;
-  document.getElementById('modalTabs').innerHTML = ['food','attractions','shopping','nightlife','transport']
-    .map(t=>`<button class="modal-tab${t==='food'?' active':''}" onclick="switchTab('${t}')">${t==='food'?'🍜 美食':t==='attractions'?'📸 景点':t==='shopping'?'🛍️ 商圈':t==='nightlife'?'🌃 夜生活':'🚌 交通'}</button>`).join('');
-  currentTab='food';
-  renderTab(key,'food');
-  document.getElementById('modalOverlay').classList.add('active');
-  document.body.style.overflow='hidden';
-}
-
-function closeModal(){
-  document.getElementById('modalOverlay').classList.remove('active');
-  document.body.style.overflow='';
-}
-
-function switchTab(tab){
-  currentTab = tab;
-  document.querySelectorAll('.modal-tab').forEach(b=>b.classList.toggle('active',b.textContent.includes(tab==='food'?'美食':tab==='attractions'?'景点':tab==='shopping'?'商圈':tab==='nightlife'?'夜生活':'交通')));
-  renderTab(currentCampus,tab);
-}
-
-function renderTab(key,tab){
-  const c = CAMPUSES[key];
-  const body = document.getElementById('modalBody');
-  if(tab==='food'){
-    body.innerHTML = c.food.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐，请查看附近校区</p>' :
-      `<div class="food-grid">${c.food.map(f=>`
-        <div class="food-card">
-          ${f.img ? `<img src="${f.img}" class="food-card-img" alt="${f.name}" onerror="this.style.display='none'">` : ''}
-          <div class="food-card-body">
-            <div class="food-card-top"><h4>${f.name}</h4><span class="price">${f.price}</span></div>
-            <div class="meta">
-              <span class="rating">${f.rating}</span>
-              <span>${f.type}</span>
-              ${(f.tags||[]).map(t=>`<span class="badge ${t==='hot'?'hot':t==='rec'?'rec':'new'}">${t==='hot'?'🔥人气':t==='rec'?'💯推荐':'🆕新店'}</span>`).join('')}
-            </div>
-            <div class="addr">📍 ${f.addr}</div>
-            <div class="review">"${f.review}"</div>
-          </div>
-        </div>
-      `).join('')}
-      <div class="ai-disclaimer">
-        <span class="icon">🤖</span>
-        <span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！<br>千人千味，希望大家都能找到自己的梦中情饭！❤️</span>
+// Search
+function doSearch(q) {
+  const res = document.getElementById('searchResults');
+  if (!q || q.trim().length < 1) { res.classList.remove('show'); return; }
+  q = q.toLowerCase();
+  const matches = SEARCH_DATA.filter(d =>
+    d.name.toLowerCase().includes(q) || d.type.toLowerCase().includes(q) ||
+    (d.addr && d.addr.toLowerCase().includes(q)) || d.campusName.toLowerCase().includes(q)
+  ).slice(0, 20);
+  if (matches.length === 0) {
+    res.innerHTML = '<div class="no-results">😔 没找到相关结果，换个关键词试试？</div>';
+  } else {
+    res.innerHTML = matches.map(d => `
+      <div class="sr-item" onclick="openCampus('${d.campusId}');document.getElementById('searchResults').classList.remove('show');document.getElementById('searchInput').value=''" onmousedown="event.preventDefault()">
+        <span class="sr-emoji">${d.emoji}</span>
+        <div class="sr-info"><div class="sr-name">${d.name}</div><div class="sr-detail">${d.type} · ${d.campusName}${d.rating?' · '+d.rating:''}</div></div>
+        <span class="sr-price">${d.price||''}</span>
       </div>
-    </div>`;
-  }else if(tab==='attractions'){
-    body.innerHTML = c.attractions.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐</p>' :
-      c.attractions.map(a=>`
-        <div class="attr-card">
-          ${a.img ? `<img src="${a.img}" alt="${a.name}" onerror="this.style.display='none'">` : ''}
-          <div class="attr-info">
-            <h4>${a.name}</h4>
-            <div class="price">💰 ${a.price}</div>
-            <p>${a.desc}</p>
-          </div>
-        </div>
-      `).join('');
-  }else if(tab==='shopping'){
-    body.innerHTML = c.shopping.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐</p>' :
-      c.shopping.map(s=>`<div class="route-item"><h4>${s.name}</h4><p>${s.desc} ${s.tip?`💡 ${s.tip}`:''}</p></div>`).join('');
-  }else if(tab==='nightlife'){
-    body.innerHTML = c.nightlife.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐，夜市一般在石鼓路和万达附近</p>' :
-      c.nightlife.map(n=>`<div class="route-item"><h4>${n.name}</h4><p>${n.desc}</p></div>`).join('');
-  }else{
-    body.innerHTML = `<p style="font-size:15px;line-height:2;color:#555;padding:10px">${c.transport}</p>`;
+    `).join('');
   }
-  body.scrollTop = 0;
+  res.classList.add('show');
 }
 
-// ============ TOP10 ============
-const TOP10_CAMPUS = ['dashu','dashu','zhu','hanghai','dashu','shifan','chengyi','dashu','hanghai','dashu'];
-document.getElementById('top10Grid').innerHTML = TOP10.map((f,i)=>`
-  <div class="food-card" onclick="openCampus('${f.campusKey||TOP10_CAMPUS[i]}')" style="cursor:pointer">
-    ${f.img ? `<img src="${f.img}" class="food-card-img" alt="${f.name}" onerror="this.style.display='none'">` : `<div class="food-card-img" style="display:flex;align-items:center;justify-content:center;font-size:48px;background:linear-gradient(135deg,#${['e8d5b8','f0e0c8','e0d5c0','f5e8d0','e8d8c0','e0d0b8','f0e0d0','e8d0c0','e0d0c0','f0e8d0'][i]},#fff)">${['🍜','🍲','🦆','🍢','🍝','🍗','🍛','🍅','🧋','🥘'][i]}</div>`}
-    <div class="food-card-body">
-      <div class="food-card-top"><h4>🏅 #${i+1} ${f.name}</h4><span class="price">${f.price}</span></div>
-      <div class="meta"><span class="rating">${f.rating}</span><span>${f.type}</span></div>
-      <div class="addr">📍 ${f.addr}</div>
-      <div class="review">"${f.review.slice(0,60)}..."</div>
-    </div>
-  </div>
-`).join('');
+let currentCampus = null;
+function openCampus(id) {
+  currentCampus = id;
+  const c = CAMPUSES[id];
+  document.getElementById('modalTitle').innerHTML = c.emoji + ' ' + c.name + ' <span style="font-size:14px;opacity:0.7;font-weight:400">' + (c.area||'') + '</span>';
+  let body = '';
+  for (const tab of ['food','attr','shop','night','trans']) {
+    body += '<div class="tab-content' + (tab==='food'?' active':'') + '" id="tab-'+tab+'">';
+    if (tab === 'food') {
+      body += '<div class="food-grid">';
+      for (const f of c.food||[]) {
+        let tags = '';
+        if (f.tags) { tags = '<div class="tags">' + f.tags.map(t => '<span class="tag '+t+'">' + ({hot:'🔥热门',rec:'👍推荐','new':'🆕新店'}[t]||'') + '</span>').join('') + '</div>'; }
+        const img = f.img ? '<img src="'+f.img+'" class="food-card-img" alt="'+f.name+'" onerror="this.style.display=\'none\'">' : '<div class="food-card-img" style="display:flex;align-items:center;justify-content:center;font-size:40px;background:#f5f0e8">🍽️</div>';
+        body += '<div class="food-card">'+img+'<div class="food-card-body"><div class="food-card-top"><h4>'+f.name+'</h4><span class="price">'+f.price+'</span></div><div class="meta"><span class="rating">'+f.rating+'</span><span>'+f.type+'</span></div><div class="addr">📍 '+f.addr+'</div><div class="review">"'+f.review+'"</div>'+tags+'</div></div>';
+      }
+      body += '</div><div class="ai-disclaimer" style="margin-top:20px"><span class="ai-icon">🤖</span><span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！千人千味，希望大家都能找到自己的梦中情饭！❤️</span></div>';
+    } else if (tab === 'attr') {
+      body += '<div class="attraction-grid">';
+      for (const a of c.attractions||[]) {
+        const img = a.img ? '<img src="'+a.img+'" class="attraction-card-img" alt="'+a.name+'" onerror="this.style.display=\'none\'">' : '<div class="attraction-card-img" style="display:flex;align-items:center;justify-content:center;font-size:36px;background:#e8f0e8">📸</div>';
+        body += '<div class="attraction-card">'+img+'<div class="attraction-card-body"><h4>'+a.name+'</h4><div style="font-size:12px;color:#2d6a4f;margin-bottom:6px">🎫 '+a.price+'</div><div class="desc">'+a.desc+'</div></div></div>';
+      }
+      body += '</div>';
+    } else if (tab === 'shop') {
+      body += '<div class="shop-list">';
+      for (const s of c.shopping||[]) { body += '<div class="shop-item"><h5>🛍️ '+s.name+'</h5><p>'+s.desc+'</p></div>'; }
+      body += '</div>';
+    } else if (tab === 'night') {
+      body += '<div class="shop-list">';
+      for (const n of c.nightlife||[]) { body += '<div class="shop-item" style="border-left-color:#2d6a4f"><h5>🌃 '+n.name+'</h5><p>'+n.desc+'</p></div>'; }
+      body += '</div>';
+    } else if (tab === 'trans') {
+      body += '<div class="transport-box"><p>🚇 '+(c.transport||'')+'</p></div>';
+    }
+    body += '</div>';
+  }
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  // Reset tabs
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.modal-tab').classList.add('active');
+}
 
-// ============ ROUTE ============
-document.getElementById('routeList').innerHTML = ROUTE.map(r=>`
-  <div class="route-item">
-    <div class="time">🕘 ${r.time}</div>
-    <h4>${r.title}</h4>
-    <p>${r.desc}</p>
-  </div>
-`).join('');
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
 
-// ============ NAV SCROLL ============
-function smoothScroll(sel){document.querySelector(sel).scrollIntoView({behavior:'smooth'})}
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
-  document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
+function switchTab(tab) {
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('#modalBody .tab-content').forEach(c => c.classList.remove('active'));
+  const el = document.getElementById('tab-'+tab);
+  if (el) el.classList.add('active');
+}
+
+// Keyboard
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Scroll effects
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 500);
 });
 
-// Keyboard close
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+// Search keyboard nav
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const first = document.querySelector('#searchResults .sr-item');
+    if (first) first.click();
+  }
+});
 </script>
 </body>
 </html>
