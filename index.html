@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集美大学 · 校区周边吃喝玩乐终极指南</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;color:#333;overflow-x:hidden}
+
+/* Hero */
+.hero{position:relative;height:100vh;min-height:700px;background:linear-gradient(135deg,#1a3a5c 0%,#0d2137 30%,#1a5c3a 70%,#0d3721 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('images/shilichangdi.png') center/cover;opacity:0.3;animation:heroZoom 20s infinite alternate}
+@keyframes heroZoom{0%{transform:scale(1)}100%{transform:scale(1.1)}}
+.hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(13,33,55,0.7) 0%,rgba(13,33,55,0.4) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:20px}
+.hero-badge{display:inline-block;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);padding:8px 24px;border-radius:30px;font-size:14px;margin-bottom:20px;letter-spacing:2px}
+.hero h1{font-size:clamp(32px,5vw,64px);font-weight:900;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,0.3);line-height:1.2}
+.hero h1 span{background:linear-gradient(90deg,#ffd700,#ffaa00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(16px,2vw,20px);opacity:0.9;max-width:600px;margin:0 auto 30px;line-height:1.8}
+.hero-stats{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
+.hero-stat{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:16px 28px;text-align:center}
+.hero-stat .num{font-size:36px;font-weight:900;color:#ffd700}
+.hero-stat .label{font-size:13px;opacity:0.7;margin-top:4px}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;color:#fff;opacity:0.7;font-size:13px;cursor:pointer}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid #e8e0d5;padding:0 20px;transition:box-shadow 0.3s}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-size:18px;font-weight:700;color:#1a3a5c;white-space:nowrap}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{text-decoration:none;color:#666;font-size:13px;padding:6px 14px;border-radius:20px;transition:all 0.3s}
+.nav-links a:hover,.nav-links a.active{background:#1a3a5c;color:#fff}
+
+/* Section */
+.section{padding:60px 20px;max-width:1200px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:40px}
+.section-title h2{font-size:clamp(24px,3vw,36px);color:#1a3a5c;margin-bottom:8px}
+.section-title p{color:#888;font-size:15px}
+
+/* Map */
+.map-container{background:#fff;border-radius:24px;box-shadow:0 4px 30px rgba(0,0,0,0.06);padding:40px;position:relative;overflow:hidden}
+.map-bg{width:100%;max-width:900px;margin:0 auto;position:relative;aspect-ratio:1.6;background:linear-gradient(180deg,#e8f4e8 0%,#d4e8d4 40%,#c8dce8 40%,#a8c8d8 70%,#f0e8d0 70%,#e8d8c0 100%);border-radius:16px;overflow:hidden}
+.water{position:absolute;background:rgba(100,160,200,0.2);border-radius:8px}
+.water.xinglin{left:50%;top:20%;width:35%;height:25%;border-radius:30% 40% 20% 35%}
+.water.longzhou{right:15%;bottom:25%;width:18%;height:10%;border-radius:30% 20% 40% 30%}
+.road{position:absolute;background:rgba(255,255,255,0.7);border:1px dashed rgba(0,0,0,0.15)}
+.road.sg{left:50%;top:0;width:3px;height:100%;transform:translateX(-50%)}
+.road.yd{top:55%;left:0;width:100%;height:3px}
+.map-label{position:absolute;font-size:10px;color:#999;font-weight:600}
+.marker{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:10;transition:transform 0.3s}
+.marker:hover{transform:translate(-50%,-50%) scale(1.2)}
+.marker-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;box-shadow:0 3px 12px rgba(0,0,0,0.2);position:relative}
+.marker-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid transparent;animation:pulse 2s infinite}
+@keyframes pulse{0%{border-color:rgba(26,58,92,0.4);transform:scale(1)}100%{border-color:rgba(26,58,92,0);transform:scale(1.4)}}
+.marker-name{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;white-space:nowrap;margin-top:4px;color:#333;text-shadow:0 0 8px rgba(255,255,255,0.8)}
+.map-legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#666}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal{background:#fff;border-radius:20px;width:90vw;max-width:900px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.2);transform:translateY(20px);transition:transform 0.3s}
+.modal-overlay.active .modal{transform:translateY(0)}
+.modal-header{background:linear-gradient(135deg,#1a3a5c,#1a5c3a);color:#fff;padding:20px 24px;position:relative}
+.modal-header h3{font-size:22px;margin-bottom:4px}
+.modal-header .sub{font-size:13px;opacity:0.8}
+.modal-close{position:absolute;right:16px;top:16px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s}
+.modal-close:hover{background:rgba(255,255,255,0.3)}
+.modal-tabs{display:flex;border-bottom:1px solid #eee;padding:0 16px;overflow-x:auto;gap:0}
+.modal-tab{padding:12px 16px;border:none;background:none;cursor:pointer;font-size:14px;color:#888;border-bottom:2px solid transparent;transition:all 0.3s;white-space:nowrap;font-family:inherit}
+.modal-tab:hover,.modal-tab.active{color:#1a5c3a;border-bottom-color:#1a5c3a}
+.modal-body{flex:1;overflow-y:auto;padding:20px}
+
+/* Food Cards */
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.food-card{background:#fafaf7;border-radius:14px;overflow:hidden;border:1px solid #eee;transition:all 0.3s;display:flex;flex-direction:column}
+.food-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.1);border-color:#1a5c3a}
+.food-card-img{width:100%;height:180px;object-fit:cover;background:#e8e0d5}
+.food-card-body{padding:14px;flex:1;display:flex;flex-direction:column}
+.food-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.food-card h4{font-size:16px;color:#1a3a5c}
+.food-card .price{color:#e85d3a;font-weight:700;font-size:15px;white-space:nowrap}
+.food-card .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;font-size:12px;color:#999}
+.food-card .meta span{display:flex;align-items:center;gap:3px}
+.food-card .rating{color:#ff9500;font-weight:600}
+.food-card .addr{font-size:12px;color:#aaa;margin-bottom:8px}
+.food-card .review{font-size:13px;color:#666;line-height:1.6;flex:1;position:relative;padding-left:12px;border-left:3px solid #e8e0d0}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.badge.hot{background:#fff0e8;color:#e85d3a}
+.badge.rec{background:#e8f5e8;color:#1a5c3a}
+.badge.new{background:#e8f0ff;color:#3a6fb5}
+
+/* Attraction cards */
+.attr-card{display:flex;gap:16px;background:#fafaf7;border-radius:14px;padding:16px;border:1px solid #eee;margin-bottom:12px;align-items:flex-start}
+.attr-card img{width:160px;height:120px;object-fit:cover;border-radius:10px;flex-shrink:0}
+.attr-info h4{font-size:16px;color:#1a3a5c;margin-bottom:4px}
+.attr-info .price{font-size:13px;color:#e85d3a;margin-bottom:6px}
+.attr-info p{font-size:14px;color:#666;line-height:1.6}
+
+/* Route */
+.route-item{background:linear-gradient(135deg,#fafaf7,#f0ede5);border-radius:14px;padding:16px;border-left:4px solid #1a5c3a;margin-bottom:12px}
+.route-item .time{font-size:13px;color:#1a5c3a;font-weight:700;margin-bottom:4px}
+.route-item h4{font-size:16px;color:#1a3a5c;margin-bottom:4px}
+.route-item p{font-size:13px;color:#666}
+
+/* Buttons */
+.btn{display:inline-block;padding:12px 28px;border-radius:25px;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none;border:none;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,#1a3a5c,#1a5c3a);color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,58,92,0.3)}
+.btn-outline{background:transparent;border:2px solid #1a3a5c;color:#1a3a5c}
+.btn-outline:hover{background:#1a3a5c;color:#fff}
+
+/* Campus buttons grid */
+.campus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:30px}
+.campus-btn{padding:14px 10px;border-radius:14px;border:2px solid #e8e0d5;background:#fff;cursor:pointer;transition:all 0.3s;text-align:center;font-size:14px;font-weight:600;color:#333;font-family:inherit}
+.campus-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.08)}
+.campus-btn .icon{display:block;font-size:28px;margin-bottom:6px}
+.campus-btn.selected{background:#1a3a5c;color:#fff;border-color:#1a3a5c}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero{min-height:500px}
+  .map-bg{aspect-ratio:1.2}
+  .marker-dot{width:28px;height:28px;font-size:11px}
+  .food-grid{grid-template-columns:1fr}
+  .attr-card{flex-direction:column}
+  .attr-card img{width:100%;height:160px}
+  .modal{width:96vw;max-height:92vh;border-radius:14px}
+  .campus-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+
+.back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:#1a3a5c;color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:50;opacity:0;pointer-events:none;transition:all 0.3s}
+.back-top.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎓 集美大学 · 新生生存指南</div>
+    <h1>校区周边<span>吃喝玩乐</span><br>终极攻略</h1>
+    <p>9大校区 · 50+家真实美食 · 12个打卡景点 · 学长学姐亲测推荐</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">9</div><div class="label">大校区</div></div>
+      <div class="hero-stat"><div class="num">50+</div><div class="label">美食推荐</div></div>
+      <div class="hero-stat"><div class="num">12</div><div class="label">景点打卡</div></div>
+      <div class="hero-stat"><div class="num">¥15</div><div class="label">人均消费</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('map-area').scrollIntoView({behavior:'smooth'})">▼ 开始探索各校区美食</div>
+</section>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">🏫 集大吃喝玩乐指南</div>
+    <div class="nav-links">
+      <a href="#map-area" onclick="smoothScroll('#map-area')">🗺️ 校区地图</a>
+      <a href="#top10" onclick="smoothScroll('#top10')">🏆 必吃TOP10</a>
+      <a href="#route" onclick="smoothScroll('#route')">🛣️ 逛吃路线</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Map Section -->
+<div class="section" id="map-area">
+  <div class="section-title">
+    <h2>🗺️ 九大校区分布地图</h2>
+    <p>点击校区标记查看周边吃喝玩乐攻略</p>
+  </div>
+
+  <!-- Mobile campus buttons -->
+  <div class="campus-grid" id="campusBtns"></div>
+
+  <div class="map-container">
+    <div class="map-bg" id="map">
+      <div class="water xinglin"></div>
+      <div class="water longzhou"></div>
+      <div class="road sg"></div>
+      <div class="road yd"></div>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#e85d3a"></div>主校区群</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3a6fb5"></div>专业校区</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a5c3a"></div>周边地标</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ff9500"></div>商圈</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle"></h3>
+      <div class="sub" id="modalSub"></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-tabs" id="modalTabs"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- TOP10 -->
+<div class="section" id="top10">
+  <div class="section-title">
+    <h2>🏆 学长学姐必吃TOP10</h2>
+    <p>集大四年吃出来的精华 · 点击卡片查看详情</p>
+  </div>
+  <div class="food-grid" id="top10Grid"></div>
+</div>
+
+<!-- Route -->
+<div class="section" id="route">
+  <div class="section-title">
+    <h2>🛣️ 一日暴走逛吃路线</h2>
+    <p>跟着路线走，一天吃遍集美精华</p>
+  </div>
+  <div id="routeList"></div>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ============ DATA ============
+const CAMPUSES = {
+  zhu: {
+    name:'主校区（本部）',sub:'银江路185号',color:'#e85d3a',
+    pos:{x:52,y:42},badge:'本部',
+    food:[
+      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'《夏至未至》取景地！开了十几年的老店，鸭汤清甜醇厚，鸭血只要一块钱超嫩滑，冬粉Q弹入味，饭点经常排队。','tags':['hot','rec']},
+      {name:'阿鹭酸笋面',price:'¥15',rating:'⭐4.6',type:'闽南小吃',addr:'集源路集美学府SOHO附近',img:'',review:'酸笋味浓郁到没进门就能闻到，汤头酸爽开胃，可选几十种配料，醋肉是隐藏招牌。','tags':['hot']},
+      {name:'森格藏布藏式酸奶',price:'¥12',rating:'⭐4.5',type:'甜品饮品',addr:'岑东路3号1楼3号店',img:'',review:'有故事的店——老板大学时和女友常来，后来盘下这家店留下回忆。主打藏式酸奶，奶味醇厚需自己加糖。','tags':['rec']},
+      {name:'帕帕烘焙栗酥饼',price:'¥10',rating:'⭐4.6',type:'糕点',addr:'集岑路1-78-101号',img:'',review:'石鼓路排队王！栗酥饼分甜咸两味，外皮酥到掉渣，芋泥饼甜度刚好。刚出炉趁热吃最绝，老厦门都专程来买。','tags':['hot','rec']},
+      {name:'王记仙豆糕',price:'¥12',rating:'⭐4.5',type:'糕点',addr:'集岑路1-102号',img:'',review:'网红仙豆糕，紫薯芋泥肉松抹茶等口味齐全，芋泥奶酪款最受欢迎，热乎的皮酥馅糯。','tags':['new']},
+      {name:'老森咖喱',price:'¥28',rating:'⭐4.4',type:'东南亚',addr:'石鼓路15-3',img:'',review:'集美学村知名咖喱店，装修复古适合拍照。招牌百香果咖喱和南瓜咖喱在其他地方很少见，咖喱浓郁配炸鸡块一绝。','tags':['rec']},
+    ],
+    attractions:[
+      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'集美标志性景观，碧绿池水映衬嘉庚建筑群，南薰楼高耸入云。端午龙舟赛最热闹，平日散步拍照也极美，推荐傍晚时分来。'},
+      {name:'南薰楼群',price:'免费',img:'',desc:'嘉庚风格建筑代表作，红砖绿瓦中西合璧，《一起来看流星雨》取景地之一。'},
+    ],
+    shopping:[{name:'石鼓路商圈',desc:'集美学子的"美食大道"，从街头吃到街尾，小吃、奶茶、餐馆一应俱全。',tip:'适合放学后扫街'}],
+    nightlife:[{name:'石鼓路夜市',desc:'夜幕降临后石鼓路变身夜市，烤串、关东煮、炒酸奶摊前围满人，烟火气拉满。'}],
+    transport:'地铁1号线集美学村站步行10分钟；多路公交可达区政府站。骑行5分钟到龙舟池，步行10分钟到石鼓路。'
+  },
+  hanghai:{
+    name:'航海学院',sub:'嘉庚路1号',color:'#3a6fb5',pos:{x:70,y:25},badge:'航海',
+    food:[
+      {name:'一树一叶(石鼓路店)',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'厦门本土茶饮品牌，被称为"厦门茶颜悦色"。闽南青观音雪山必点，铁观音茶底+鲜奶，清爽不腻。闽南花砖墙面超好拍。','tags':['hot','rec']},
+      {name:'小刘印度飞饼',price:'¥13',rating:'⭐4.5',type:'小吃',addr:'石鼓路（南段）',img:'',review:'阿姨现场甩面堪称街头表演！金褐色薄脆外壳，火腿鸡蛋馅最经典。老板温馨提醒"别系紧塑料袋，不然不脆了"。仅此一家。','tags':['hot','rec']},
+      {name:'豪香嫩里脊肉串(财院店)',price:'¥4/串',rating:'⭐4.6',type:'炸串',addr:'石鼓路32号',img:'images/liji.png',review:'沙茶腌料渗透肉心，外酥里嫩汁水爆炸。老板油温把控出神入化，撒孜然辣椒粉，配钵钵鸡一起吃层次翻倍！','tags':['hot','rec']},
+      {name:'鸡动马达',price:'¥10',rating:'⭐4.5',type:'炸物',addr:'石鼓路',img:'',review:'年糕片+薯条+鸡柳的王炸组合，咸甜辣三味融合，炸得酥脆喷香。每次排长队，但值得等。','tags':['hot']},
+      {name:'大阪烧(石鼓路店)',price:'¥14',rating:'⭐4.3',type:'小吃',addr:'石鼓路46-101号',img:'',review:'一天能卖几百个！满满料+芝士拉丝，柴鱼丝在表面跳舞。黑胡椒酱汁是灵魂，一勺挖到底超满足。','tags':['hot']},
+      {name:'水立方古早味柠檬茶',price:'¥10',rating:'⭐4.5',type:'饮品',addr:'石鼓路',img:'',review:'1000cc超大杯才10元！古早味柠檬茶和普通的不一样，解腻神器，边走边喝刚刚好。','tags':['rec']},
+    ],
+    attractions:[
+      {name:'十里长堤',price:'免费',img:'images/shilichangdi.png',desc:'集美最浪漫的地方！傍晚橙色晚霞洒满海面，远处跨海大桥做背景，草地上年轻人弹吉他唱歌。适合谈恋爱、发呆、看日落，周末有街头艺人表演。'},
+      {name:'楚雨荨的家',price:'免费',img:'',desc:'《一起来看流星雨》拍摄地，集美学子的青春回忆。适合拍复古校园风照片。'},
+    ],
+    shopping:[{name:'石鼓路商圈（北段）',desc:'紧邻石鼓路美食街最热闹的一段，从飞饼到肉串到奶茶一条龙。',tip:'从街头吃到街尾'}],
+    nightlife:[{name:'十里长堤街头音乐',desc:'周末晚上草坪上有自发组织的吉他弹唱，年轻人们围坐听歌，氛围感拉满。'},{name:'石鼓路夜市',desc:'深夜小吃摊依然灯火通明，烤苕皮、铁板烧、炒酸奶供应到深夜。'}],
+    transport:'地铁1号线集美学村站步行15分钟。石鼓路就在校门口，扫辆共享单车几分钟就到万达。'
+  },
+  lunjin:{
+    name:'轮机工程学院',sub:'石鼓路78号',color:'#3a6fb5',pos:{x:55,y:55},badge:'轮机',
+    food:[
+      {name:'豪香嫩里脊肉串(财院店)',price:'¥4/串',rating:'⭐4.6',type:'炸串',addr:'石鼓路32号',img:'images/liji.png',review:'就在石鼓路上，轮机学子走路三分钟到。里脊肉提前腌制后现炸，肉质嫩到惊艳，撒上孜然和辣椒，配钵钵鸡一起吃层次丰富。','tags':['hot','rec']},
+      {name:'小刘印度飞饼',price:'¥13',rating:'⭐4.5',type:'小吃',addr:'石鼓路（南段）',img:'',review:'阿姨甩面的手艺堪称街头一景。金褐色薄脆外壳，馅料丰富，咸甜都有。老板提醒别系紧袋子不然不脆。','tags':['hot']},
+      {name:'一树一叶',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'厦门本土"茶颜悦色"。闽南青观音雪山必点，铁观音+鲜奶的清爽搭配让无数集美学子上头。','tags':['hot','rec']},
+      {name:'美阿玉米汁',price:'¥10',rating:'⭐4.4',type:'饮品',addr:'石鼓路34号',img:'',review:'每杯都是新鲜玉米现榨，浓稠香滑无负担。冬瓜玉米须茶更清爽，冰镇款解腻一流。','tags':['rec']},
+      {name:'梅干菜扣肉饼',price:'¥9',rating:'⭐4.3',type:'小吃',addr:'石鼓路',img:'',review:'饼大料足现做现卖，刚出炉时梅干菜香气飘十里。一个就能顶一顿饭，江湖人称"石鼓路扛把子"。','tags':['hot']},
+      {name:'漳州麻糍冰淇淋',price:'¥5',rating:'⭐4.4',type:'甜品',addr:'石鼓路',img:'',review:'糯叽叽的麻糍包上冰淇淋，软糯+冰爽的奇妙组合。口味超多，买一盒带回寝室。','tags':['new']},
+    ],
+    attractions:[
+      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'步行10分钟即达。池畔嘉庚建筑倒映水中，是轮机学子课后最爱去的地方。端午赛龙舟时最值得看。'},
+      {name:'南堤公园',price:'免费',img:'',desc:'临海小公园，散步吹风好去处。可以看到集美大桥和海上日落。'},
+    ],
+    shopping:[{name:'石鼓路',desc:'校门口就是石鼓路美食街核心段，出门就能吃到嗨。',tip:'零距离美食'},{name:'集美万达广场',desc:'步行15分钟，看电影、逛街、聚餐一站式解决。'}],
+    nightlife:[{name:'石鼓路夜市',desc:'石鼓路深夜变身美食夜市，烤串、鸡蛋仔、关东煮供应到凌晨。'}],
+    transport:'就在石鼓路核心地段，步行5分钟到龙舟池，骑行10分钟到万达。校门口多路公交直达厦门市区。'
+  },
+  caimao:{
+    name:'财经学院',sub:'集岑路',color:'#e85d3a',pos:{x:48,y:35},badge:'财经',
+    food:[
+      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'距离财经学院最近的老字号！电视剧《夏至未至》取景地。鸭汤醇厚鲜美，鸭血嫩滑只要一块钱，财经学子的"食堂"之一。','tags':['hot','rec']},
+      {name:'帕帕烘焙栗酥饼',price:'¥10',rating:'⭐4.6',type:'糕点',addr:'集岑路1-78-101号',img:'',review:'财经学院附近的人气王，栗酥饼甜咸双味，酥到掉渣。芋泥馅的也好吃，甜而不腻。','tags':['hot']},
+      {name:'王记仙豆糕',price:'¥12',rating:'⭐4.5',type:'糕点',addr:'集岑路1-102号',img:'',review:'就在集岑路上，四四方方的仙豆糕超可爱。芋泥奶酪是爆款，热乎时外酥内糯。','tags':['new']},
+      {name:'三胖家东北烤肉',price:'¥50',rating:'⭐4.4',type:'烤肉',addr:'银亭路8号',img:'',review:'东北烤肉在集美很出名，肉现切现腌非冷冻，性价比高，老板热情常打折，回头客超多。','tags':['rec']},
+      {name:'老森咖喱',price:'¥28',rating:'⭐4.4',type:'东南亚',addr:'石鼓路15-3',img:'',review:'复古风咖喱店，百香果咖喱和南瓜咖喱独特又好吃。环境适合约会拍照。','tags':['rec']},
+    ],
+    attractions:[
+      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'财经学院步行5分钟就到。池畔散步、拍照、发呆，傍晚夕阳西下时最美。'},
+      {name:'嘉庚公园/鳌园',price:'免费',img:'',desc:'了解陈嘉庚先生生平，鳌园的石雕艺术令人叹为观止。必去景点。'},
+    ],
+    shopping:[{name:'石鼓路',desc:'步行5分钟，集美学子最爱的美食街，从白天吃到深夜。'},{name:'集岑路一带',desc:'集岑路本身也有很多小店，仙豆糕、栗酥饼都在这条路上。'}],
+    nightlife:[{name:'石鼓路夜市',desc:'深夜食堂模式，各类小吃摊灯火通明。'}],
+    transport:'地铁集美学村站步行约12分钟。校门口就是石鼓路/集岑路交叉口，步行去哪都方便。'
+  },
+  dashu:{
+    name:'水产/科学馆校区',sub:'大社路周边',color:'#e85d3a',pos:{x:40,y:30},badge:'大社',
+    food:[
+      {name:'大社戏台沙茶面',price:'¥16',rating:'⭐4.7',type:'闽南小吃',addr:'大社路96-101号',img:'images/shachamian.png',review:'被集美人称为"厦门最好吃的沙茶面"！汤底沙茶味浓郁偏甜，花生碎是灵魂。老板夫妇在戏台旁经营多年，《早餐中国》曾推荐。认准正牌老店！','tags':['hot','rec']},
+      {name:'联生老店',price:'¥15',rating:'⭐4.6',type:'闽南小炒',addr:'大社路128号',img:'',review:'隐藏在大社里的老字号。联生炒面是每桌必点，闽南碱面配虾仁肉片青菜，料足味美。只有中午和傍晚营业。','tags':['hot','rec']},
+      {name:'大社阿发海蛎饼',price:'¥6',rating:'⭐4.5',type:'小吃',addr:'盛光路50-101号',img:'',review:'每张饼夹六七个饱满海蛎，超厚实！海蛎的鲜甜和蔬菜的清香在口中交织，海鲜爱好者必试。','tags':['hot']},
+      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'从大社走过去也不远。鸭汤醇厚鲜美，鸭血一块钱无敌滑嫩，加一份油条蘸汤吃才是正确打开方式。','tags':['hot','rec']},
+      {name:'森格藏布藏式酸奶',price:'¥12',rating:'⭐4.5',type:'甜品饮品',addr:'岑东路3号',img:'',review:'西藏酸奶在闽南的奇妙碰撞。奶味浓郁醇厚，加糖后超好喝。店里的西藏装饰都是老板旅行带回。','tags':['rec']},
+      {name:'大社阿鹭酸笋面',price:'¥15',rating:'⭐4.6',type:'小吃',addr:'集源路',img:'',review:'酸笋味霸气十足，几十种配料任选，醋肉是隐藏王牌。分量足味道好。','tags':['hot']},
+    ],
+    attractions:[
+      {name:'集美大社',price:'免费',img:'',desc:'闽南传统古村落，红砖古厝和石板小巷保留着原汁原味的闽南风情。在这里可以找到最正宗的古早味美食，还有文创小店和壁画墙。'},
+      {name:'嘉庚公园',price:'免费',img:'',desc:'纪念爱国华侨陈嘉庚先生的园林公园，环境清幽，适合散步拍照。鳌园石雕是一绝。'},
+      {name:'南薰楼',price:'免费',img:'',desc:'嘉庚建筑的代表作，红砖砌筑中西合璧风格，是集美最高建筑之一，登楼可远眺海景。'},
+    ],
+    shopping:[{name:'大社文创小店',desc:'古厝改造的文创店、咖啡馆和手作工作室，文艺气息浓厚。'},{name:'石鼓路',desc:'往东走10分钟就到大名鼎鼎的石鼓路美食街。'}],
+    nightlife:[{name:'大社古厝茶室',desc:'夜晚坐在古厝天井喝茶聊天，闽南韵味十足。'}],
+    transport:'地铁集美学村站步行约20分钟或骑行8分钟。大社区域适合步行探索，钻进巷子会有惊喜。'
+  },
+  shifan:{
+    name:'师范学院',sub:'印斗路',color:'#e85d3a',pos:{x:62,y:38},badge:'师范',
+    food:[
+      {name:'大阪烧(石鼓路店)',price:'¥14',rating:'⭐4.3',type:'小吃',addr:'石鼓路46-101号',img:'',review:'只走几分钟就到石鼓路。满满配菜+芝士拉丝，黑胡椒酱汁是灵魂。一天卖出几百个，学生最爱。','tags':['hot']},
+      {name:'鸡动马达',price:'¥10',rating:'⭐4.5',type:'炸物',addr:'石鼓路',img:'',review:'年糕+薯条+鸡柳的黄金组合，咸甜辣三味融合。排队虽长但绝对值得。','tags':['hot']},
+      {name:'邱思明炒食',price:'¥15',rating:'⭐4.4',type:'炒面',addr:'岑东路44号104',img:'',review:'开了十来年的炒面店！自选小料均价3元，招牌炒泡面，大火爆炒的锅气配上黑胡椒酱，微辣香浓。','tags':['rec']},
+      {name:'一树一叶(石鼓路店)',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'厦门茶颜悦色。闽南青观音雪山用铁观音茶底配鲜奶，清爽回甘，超适合师范学院的下午茶。','tags':['hot','rec']},
+      {name:'熊阿熊西瓜碎奶·福伯烧仙草',price:'¥13',rating:'⭐4.6',type:'饮品',addr:'集岑路1-82号',img:'',review:'夏天必喝的西瓜碎奶，烧仙草也是招牌，消暑解渴第一名。','tags':['rec','new']},
+    ],
+    attractions:[
+      {name:'嘉庚公园',price:'免费',img:'',desc:'离师范学院很近，是课后散步的好去处。了解嘉庚精神，欣赏鳌园石雕。'},
+      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'步行十几分钟，池畔看嘉庚建筑群的绝美倒影，是师院学生常去的发呆地。'},
+    ],
+    shopping:[{name:'石鼓路',desc:'步行8分钟到石鼓路核心段，吃喝玩乐一应俱全。'},{name:'印斗路小店',desc:'校门口街边小超市和便利店，日常用品购物方便。'}],
+    nightlife:[{name:'石鼓路夜市',desc:'夜市模式开启后从小吃到炸物到甜品全都有，适合结伴扫街。'}],
+    transport:'多路公交可达。步行到石鼓路8分钟，骑行到龙舟池10分钟。'
+  },
+  meishu:{
+    name:'美术与设计学院',sub:'集岑路',color:'#e85d3a',pos:{x:45,y:38},badge:'美院',
+    food:[
+      {name:'帕帕烘焙栗酥饼',price:'¥10',rating:'⭐4.6',type:'糕点',addr:'集岑路1-78-101号',img:'',review:'就在美院附近！酥到掉渣的栗酥饼，甜味和咸味都好吃，芋泥饼也是经典。刚出炉的香气能把整条街的人吸引过来。','tags':['hot','rec']},
+      {name:'王记仙豆糕',price:'¥12',rating:'⭐4.5',type:'糕点',addr:'集岑路1-102号',img:'',review:'与栗酥饼比邻的网红小店。仙豆糕口味丰富，芋泥奶酪款最受欢迎，热乎时外酥内糯。','tags':['new']},
+      {name:'奔水冬粉鸭',price:'¥18',rating:'⭐5.0',type:'闽南小吃',addr:'岑东路156号',img:'images/dongfenya.png',review:'美院学子的温暖食堂。冬粉鸭配油条是隐藏吃法，鸭汤醇厚鲜美，天冷时来一碗暖到胃里。','tags':['hot','rec']},
+      {name:'杨府匠麻糍',price:'¥8',rating:'⭐4.4',type:'甜品',addr:'塘埔路139-22号',img:'',review:'芋泥冰淇淋双拼的奇妙碰撞。糯弹麻糍+冰凉冰淇淋，夏天来一份超爽。','tags':['new']},
+    ],
+    attractions:[
+      {name:'龙舟池',price:'免费',img:'images/longzhouchipng.png',desc:'步行不到10分钟，美院学生写生的好去处。嘉庚建筑+碧水蓝天，怎么画怎么美。'},
+      {name:'集美大社',price:'免费',img:'',desc:'闽南古村落，红砖古厝+石板小路，文艺氛围浓厚，是美院学生寻找灵感和拍素材的好地方。'},
+    ],
+    shopping:[{name:'集岑路',desc:'校门口就是集岑路，栗酥饼、仙豆糕都在这里，还有各种文具画材店。'},{name:'石鼓路',desc:'步行5分钟无缝衔接石鼓路美食街。'}],
+    nightlife:[{name:'大社古厝咖啡',desc:'夜晚坐在百年古厝改造的咖啡馆里，文艺气息与闽南古韵交融。'}],
+    transport:'步行5分钟到石鼓路核心段，骑行10分钟可到万达或十里长堤。'
+  },
+  chengyi:{
+    name:'诚毅学院',sub:'集美大道199号',color:'#1a5c3a',pos:{x:80,y:15},badge:'诚毅',
+    food:[
+      {name:'鑫坞堂姜母鸭(集美店)',price:'¥60',rating:'⭐4.1',type:'闽菜',addr:'集岑路1-81号',img:'',review:'厦门名片级美食，鸭肉加姜片在砂锅里慢炖，姜香浓郁鸭肉酥烂。适合2-3人聚餐。','tags':['rec']},
+      {name:'片皮鸭(石鼓路店)',price:'¥20',rating:'⭐4.2',type:'小吃',addr:'石鼓路30-101号',img:'',review:'物美价廉的北京风味烤鸭卷，饼薄肉多酱香，来一份边走边吃刚刚好。','tags':['rec']},
+      {name:'小鱼号酸菜鱼(石鼓路店)',price:'¥24',rating:'⭐4.1',type:'川菜',addr:'集美小学北门旁',img:'',review:'招牌柠檬酸汤无骨鱼，酸爽开胃价格亲民，单人份也能吃得很满足。','tags':['new']},
+      {name:'一树一叶',price:'¥18',rating:'⭐4.6',type:'饮品',addr:'石鼓路',img:'images/naicha.png',review:'闽南铁观音奶茶，茶香和奶香都浓郁。阿达子Q弹有嚼劲，是诚毅学子的快乐水。','tags':['hot','rec']},
+    ],
+    attractions:[
+      {name:'园博苑',price:'¥30',img:'',desc:'诚毅后花园！超大型园林博览园，各国园林风格齐聚，适合周末一日游，拍照超出片。'},
+      {name:'十里长堤',price:'免费',img:'images/shilichangdi.png',desc:'骑行15分钟到。傍晚在草坡上看日落听吉他，是诚毅学子最浪漫的课后活动。'},
+      {name:'海上自行车道',price:'免费',img:'',desc:'杏林湾上的海上自行车道，体验在海面上骑行，风景独特。'},
+    ],
+    shopping:[{name:'集美万达广场',desc:'诚毅最近的大型商圈，吃饭、看电影、逛街、KTV一站式。'},{name:'iOi MALL',desc:'新开的大型商场，品牌多环境好，诚毅学子周末新去处。'}],
+    nightlife:[{name:'星巢越中心',desc:'livehouse演出场地，经常有乐队巡演和独立音乐人表演，文艺青年聚集地。'},{name:'万达影城',desc:'IMAX影厅看大片，学生还有优惠场次。'}],
+    transport:'地铁1号线至集美大道站步行约10分钟。BRT快1线也可达。共享单车骑行15分钟到十里长堤。'
+  },
+  fuxingdong:{
+    name:'福东校区',sub:'同集南路',color:'#1a5c3a',pos:{x:35,y:65},badge:'福东',
+    food:[
+      {name:'阿鹭酸笋面',price:'¥15',rating:'⭐4.6',type:'闽南小吃',addr:'集源路集美学府SOHO附近',img:'',review:'福东校区附近的人气小店，酸笋味浓郁，配料几十种自选，醋肉必加。分量十足价格实惠。','tags':['hot']},
+      {name:'大社阿发海蛎饼',price:'¥6',rating:'⭐4.5',type:'小吃',addr:'盛光路50-101号',img:'',review:'饱满的海蛎肉夹在脆皮饼里，一口下去海鲜汁水爆开，六个海蛎只要六块钱。','tags':['hot']},
+      {name:'联生老店',price:'¥15',rating:'⭐4.6',type:'闽南小炒',addr:'大社路128号',img:'',review:'从福东走过去15分钟，联生炒面是招牌，闽南碱面配虾仁肉片青菜，一份管饱。','tags':['rec']},
+    ],
+    attractions:[
+      {name:'集美大社',price:'免费',img:'',desc:'古村落里的红砖古厝和石板小巷，藏着最正宗的大社戏台沙茶面。步行15分钟可达。'},
+      {name:'南堤公园',price:'免费',img:'',desc:'临海绿地，适合傍晚散步看海，天气好时可以看到厦门岛的轮廓。'},
+    ],
+    shopping:[{name:'集源路商圈',desc:'周边生活配套齐全，超市、便利店、小餐馆日常所需全覆盖。'}],
+    nightlife:[],
+    transport:'BRT快1线可达。骑行到龙舟池约15分钟。周边公交线路多，进岛方便。'
+  },
+};
+
+const ROUTE = [
+  {time:'09:00',title:'龙舟池 · 清晨散步',desc:'从龙舟池开始一天。清晨的池水如镜，嘉庚建筑倒映其中。沿着池畔走一圈，拍几张美照，感受集美学村的宁静。步行至大社。'},
+  {time:'10:00',title:'大社 · 古村探索',desc:'钻进大社的闽南古厝，看红砖墙、石板路和壁画墙。先去大社戏台旁吃一碗沙茶面（¥16），再到联生老店来一份炒面（¥15），最后阿发海蛎饼收尾（¥6）。'},
+  {time:'12:00',title:'石鼓路 · 午餐扫街',desc:'沿着石鼓路从南往北：小刘印度飞饼（¥13）→ 豪香嫩里脊肉串（¥4/串×3=¥12）→ 大阪烧（¥14）→ 鸡动马达（¥10），最后喝杯一树一叶奶茶（¥18）解腻。'},
+  {time:'14:00',title:'嘉庚公园 · 文化之旅',desc:'步行前往嘉庚公园和鳌园，了解陈嘉庚生平事迹，欣赏精美的石雕艺术。鳌园的石刻"诸葛亮前出师表"是隐藏宝藏。'},
+  {time:'16:00',title:'万达广场 · 逛街歇脚',desc:'骑共享单车到集美万达广场。逛逛商场吹空调，或者去万达金街找下午茶。推荐森山仙草来碗烧仙草（¥19），清凉解暑。'},
+  {time:'17:30',title:'十里长堤 · 最美日落',desc:'傍晚前赶到十里长堤占个好位置。橙色晚霞洒满海面，远处跨海大桥做背景，草地上年轻人弹吉他唱歌。这是集美最美的一刻，必须打卡！'},
+  {time:'19:00',title:'石鼓路 · 晚餐+夜市',desc:'晚餐回石鼓路吃正餐：三胖家东北烤肉（人均¥50）或老森咖喱（¥28）。饭后逛夜市，烤苕皮、梅干菜饼、漳州麻糍继续嗨。'},
+  {time:'21:00',title:'十里长堤/星巢 · 夜生活',desc:'想看Livehouse去星巢越中心，想听街头弹唱回十里长堤。坐在草地上吹海风听歌，这才是集美大学生活的正确打开方式。'},
+];
+
+const TOP10 = [
+  CAMPUSES.dashu.food[0],CAMPUSES.zhu.food[0],CAMPUSES.hanghai.food[2],
+  CAMPUSES.dashu.food[1],CAMPUSES.zhu.food[3],CAMPUSES.hanghai.food[1],
+  CAMPUSES.hanghai.food[4],CAMPUSES.hanghai.food[0],CAMPUSES.dashu.food[2],
+  CAMPUSES.caimao.food[4]
+];
+
+// ============ RENDER MAP ============
+const map = document.getElementById('map');
+const campusBtns = document.getElementById('campusBtns');
+const campusKeys = ['zhu','hanghai','lunjin','caimao','dashu','shifan','meishu','chengyi','fuxingdong'];
+
+const COLORS = {zhu:'#e85d3a',hanghai:'#3a6fb5',lunjin:'#3a6fb5',caimao:'#e85d3a',dashu:'#e85d3a',shifan:'#e85d3a',meishu:'#e85d3a',chengyi:'#1a5c3a',fuxingdong:'#1a5c3a'};
+
+campusKeys.forEach(key=>{
+  const c = CAMPUSES[key];
+  // Map marker
+  const m = document.createElement('div');
+  m.className='marker';
+  m.style.cssText=`left:${c.pos.x}%;top:${c.pos.y}%`;
+  m.innerHTML=`<div class="marker-dot" style="background:${c.color}">${c.badge}</div><div class="marker-name">${c.name.replace(/（.*/,'')}</div>`;
+  m.onclick=()=>openCampus(key);
+  map.appendChild(m);
+
+  // Mobile button
+  const btn = document.createElement('button');
+  btn.className='campus-btn';
+  btn.style.color=c.color;
+  btn.style.borderColor=c.color+'33';
+  btn.innerHTML=`<span class="icon">${c.badge==='本部'?'🏫':c.badge==='航海'?'⚓':c.badge==='轮机'?'🔧':c.badge==='财经'?'💰':c.badge==='大社'?'🏘️':c.badge==='师范'?'📚':c.badge==='美院'?'🎨':c.badge==='诚毅'?'🦁':c.badge==='福东'?'🏠':''}</span>${c.name}`;
+  btn.onclick=()=>{openCampus(key);document.getElementById('map-area').scrollIntoView({behavior:'smooth'});};
+  campusBtns.appendChild(btn);
+});
+
+// ============ MODAL ============
+let currentTab = 'food';
+let currentCampus = null;
+
+function openCampus(key){
+  currentCampus = key;
+  const c = CAMPUSES[key];
+  document.getElementById('modalTitle').textContent = c.name;
+  document.getElementById('modalSub').textContent = c.sub;
+  document.getElementById('modalTabs').innerHTML = ['food','attractions','shopping','nightlife','transport']
+    .map(t=>`<button class="modal-tab${t==='food'?' active':''}" onclick="switchTab('${t}')">${t==='food'?'🍜 美食':t==='attractions'?'📸 景点':t==='shopping'?'🛍️ 商圈':t==='nightlife'?'🌃 夜生活':'🚌 交通'}</button>`).join('');
+  currentTab='food';
+  renderTab(key,'food');
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+function switchTab(tab){
+  currentTab = tab;
+  document.querySelectorAll('.modal-tab').forEach(b=>b.classList.toggle('active',b.textContent.includes(tab==='food'?'美食':tab==='attractions'?'景点':tab==='shopping'?'商圈':tab==='nightlife'?'夜生活':'交通')));
+  renderTab(currentCampus,tab);
+}
+
+function renderTab(key,tab){
+  const c = CAMPUSES[key];
+  const body = document.getElementById('modalBody');
+  if(tab==='food'){
+    body.innerHTML = c.food.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐，请查看附近校区</p>' :
+      `<div class="food-grid">${c.food.map(f=>`
+        <div class="food-card">
+          ${f.img ? `<img src="${f.img}" class="food-card-img" alt="${f.name}" onerror="this.style.display='none'">` : ''}
+          <div class="food-card-body">
+            <div class="food-card-top"><h4>${f.name}</h4><span class="price">${f.price}</span></div>
+            <div class="meta">
+              <span class="rating">${f.rating}</span>
+              <span>${f.type}</span>
+              ${(f.tags||[]).map(t=>`<span class="badge ${t==='hot'?'hot':t==='rec'?'rec':'new'}">${t==='hot'?'🔥人气':t==='rec'?'💯推荐':'🆕新店'}</span>`).join('')}
+            </div>
+            <div class="addr">📍 ${f.addr}</div>
+            <div class="review">"${f.review}"</div>
+          </div>
+        </div>
+      `).join('')}</div>`;
+  }else if(tab==='attractions'){
+    body.innerHTML = c.attractions.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐</p>' :
+      c.attractions.map(a=>`
+        <div class="attr-card">
+          ${a.img ? `<img src="${a.img}" alt="${a.name}" onerror="this.style.display='none'">` : ''}
+          <div class="attr-info">
+            <h4>${a.name}</h4>
+            <div class="price">💰 ${a.price}</div>
+            <p>${a.desc}</p>
+          </div>
+        </div>
+      `).join('');
+  }else if(tab==='shopping'){
+    body.innerHTML = c.shopping.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐</p>' :
+      c.shopping.map(s=>`<div class="route-item"><h4>${s.name}</h4><p>${s.desc} ${s.tip?`💡 ${s.tip}`:''}</p></div>`).join('');
+  }else if(tab==='nightlife'){
+    body.innerHTML = c.nightlife.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐，夜市一般在石鼓路和万达附近</p>' :
+      c.nightlife.map(n=>`<div class="route-item"><h4>${n.name}</h4><p>${n.desc}</p></div>`).join('');
+  }else{
+    body.innerHTML = `<p style="font-size:15px;line-height:2;color:#555;padding:10px">${c.transport}</p>`;
+  }
+  body.scrollTop = 0;
+}
+
+// ============ TOP10 ============
+document.getElementById('top10Grid').innerHTML = TOP10.map((f,i)=>`
+  <div class="food-card" onclick="openCampus('${i<3?'dashu':i===3?'dashu':i===4?'zhu':i===5?'hanghai':i===6?'hanghai':i===7?'hanghai':i===8?'dashu':'caimao'}')" style="cursor:pointer">
+    ${f.img ? `<img src="${f.img}" class="food-card-img" alt="${f.name}" onerror="this.style.display='none'">` : `<div class="food-card-img" style="display:flex;align-items:center;justify-content:center;font-size:48px;background:linear-gradient(135deg,#${['e8d5b8','f0e0c8','e0d5c0','f5e8d0','e8d8c0','e0d0b8','f0e0d0','e8d0c0','e0d0c0','f0e8d0'][i]},#fff)">${['🍜','🦆','🍢','🍝','🥮','🫓','🥞','🧋','🦪','🍛'][i]}</div>`}
+    <div class="food-card-body">
+      <div class="food-card-top"><h4>🏅 #${i+1} ${f.name}</h4><span class="price">${f.price}</span></div>
+      <div class="meta"><span class="rating">${f.rating}</span><span>${f.type}</span></div>
+      <div class="addr">📍 ${f.addr}</div>
+      <div class="review">"${f.review.slice(0,60)}..."</div>
+    </div>
+  </div>
+`).join('');
+
+// ============ ROUTE ============
+document.getElementById('routeList').innerHTML = ROUTE.map(r=>`
+  <div class="route-item">
+    <div class="time">🕘 ${r.time}</div>
+    <h4>${r.title}</h4>
+    <p>${r.desc}</p>
+  </div>
+`).join('');
+
+// ============ NAV SCROLL ============
+function smoothScroll(sel){document.querySelector(sel).scrollIntoView({behavior:'smooth'})}
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
+});
+
+// Keyboard close
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
