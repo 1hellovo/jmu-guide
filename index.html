@@ -140,6 +140,26 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;c
 
 .back-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:#1a3a5c;color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);z-index:50;opacity:0;pointer-events:none;transition:all 0.3s}
 .back-top.show{opacity:1;pointer-events:auto}
+
+/* AI disclaimer */
+.ai-disclaimer{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff8e7,#fef3e0);border:1px dashed #e8c87a;border-radius:12px;padding:12px 16px;margin-top:16px;font-size:13px;color:#b8860b;line-height:1.7}
+.ai-disclaimer .icon{font-size:24px;flex-shrink:0}
+.ai-disclaimer strong{color:#d48806}
+
+/* Xiaoqi CTA */
+.xiaoqi-cta{position:relative;text-align:center;padding:22px 20px;background:linear-gradient(135deg,#ff6b6b,#ff8e53,#ff6b6b);background-size:200% 200%;animation:ctaShine 3s ease infinite;color:#fff;border-radius:0;margin-bottom:0}
+@keyframes ctaShine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.xiaoqi-cta .cta-text{font-size:clamp(16px,2.5vw,20px);font-weight:700;letter-spacing:1px;text-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.xiaoqi-cta .cta-wechat{display:inline-block;background:rgba(255,255,255,0.25);backdrop-filter:blur(8px);padding:8px 22px;border-radius:25px;font-size:clamp(14px,2vw,18px);font-weight:900;margin:8px 0 0;letter-spacing:2px;border:2px dashed rgba(255,255,255,0.5);animation:pulse-border 2s infinite}
+@keyframes pulse-border{0%,100%{border-color:rgba(255,255,255,0.5);box-shadow:0 0 0 0 rgba(255,255,255,0.3)}50%{border-color:rgba(255,255,255,0.9);box-shadow:0 0 0 12px rgba(255,255,255,0)}}
+.xiaoqi-cta .cta-sub{font-size:13px;opacity:0.85;margin-top:4px}
+
+/* Footer CTA */
+.footer-cta{position:fixed;bottom:0;left:0;right:0;z-index:150;background:linear-gradient(90deg,#1a3a5c,#1a5c3a);color:#fff;padding:12px 20px;text-align:center;font-size:14px;font-weight:700;letter-spacing:1px;box-shadow:0 -4px 20px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;cursor:pointer}
+.footer-cta .f-emoji{font-size:20px}
+.footer-cta .f-code{background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:20px;font-size:15px;letter-spacing:2px;font-weight:900;border:1px dashed rgba(255,255,255,0.5)}
+.footer-cta .f-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;border:none;background:rgba(255,255,255,0.2);color:#fff;font-size:14px;cursor:pointer;line-height:1}
+@media(max-width:768px){.footer-cta{font-size:12px;padding:10px 14px;gap:6px}.footer-cta .f-code{font-size:13px;padding:4px 12px}}
 </style>
 </head>
 <body>
@@ -160,6 +180,13 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;c
   </div>
   <div class="scroll-hint" onclick="document.getElementById('map-area').scrollIntoView({behavior:'smooth'})">▼ 开始探索各校区美食</div>
 </section>
+
+<!-- Xiaoqi CTA Banner -->
+<div class="xiaoqi-cta">
+  <div class="cta-text">🎓 找小七学姐，领更多集大新生指南！</div>
+  <div class="cta-wechat">＋ JMUXJ1920</div>
+  <div class="cta-sub">📲 装修/社团/选课/周边探店 · 一站式解答</div>
+</div>
 
 <!-- Nav -->
 <nav class="nav" id="nav">
@@ -219,6 +246,10 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;c
     <p>集大四年吃出来的精华 · 点击卡片查看详情</p>
   </div>
   <div class="food-grid" id="top10Grid"></div>
+  <div class="ai-disclaimer" style="max-width:900px;margin:20px auto 0">
+    <span class="icon">🤖</span>
+    <span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！<br>千人千味，希望大家都能找到自己的梦中情饭！❤️</span>
+  </div>
 </div>
 
 <!-- Route -->
@@ -228,6 +259,19 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;c
     <p>跟着路线走，一天吃遍集美精华</p>
   </div>
   <div id="routeList"></div>
+  
+  <!-- Final CTA -->
+  <div style="text-align:center;padding:20px 0 80px">
+    <div class="btn btn-primary" style="font-size:16px;padding:14px 36px" onclick="window.scrollTo({top:0,behavior:'smooth'})">👆 回顶部 · 找小七学姐＋JMUXJ1920</div>
+  </div>
+</div>
+
+<!-- Sticky Footer CTA -->
+<div class="footer-cta" id="footerCta">
+  <span class="f-emoji">👇</span>
+  <span>找小七学姐领更多指南</span>
+  <span class="f-code">＋JMUXJ1920</span>
+  <button class="f-close" onclick="document.getElementById('footerCta').style.display='none'">✕</button>
 </div>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -498,7 +542,12 @@ function renderTab(key,tab){
             <div class="review">"${f.review}"</div>
           </div>
         </div>
-      `).join('')}</div>`;
+      `).join('')}
+      <div class="ai-disclaimer">
+        <span class="icon">🤖</span>
+        <span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！<br>千人千味，希望大家都能找到自己的梦中情饭！❤️</span>
+      </div>
+    </div>`;
   }else if(tab==='attractions'){
     body.innerHTML = c.attractions.length===0 ? '<p style="color:#999;text-align:center;padding:40px">暂无推荐</p>' :
       c.attractions.map(a=>`
