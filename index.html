@@ -59,7 +59,7 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f0e8;c
 .meta{display:flex;gap:10px;font-size:12px;color:#888;margin-bottom:6px}
 .rating{color:#ff8c00;font-weight:600}
 .addr{font-size:12px;color:#999;margin-bottom:8px}
-.review{font-size:13px;color:#555;line-height:1.5;font-style:italic}
+.review{font-size:13px;color:#555;line-height:1.5;font-style:italic}.nav-link{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:6px 12px;background:linear-gradient(135deg,#2d6a4f,#40916c);color:#fff;border-radius:20px;font-size:12px;text-decoration:none;transition:all 0.2s;width:fit-content}.nav-link:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(45,106,79,0.3)}
 .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
 .tag{padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
 .tag.hot{background:#ffe0e0;color:#c0392b}
@@ -2428,7 +2428,7 @@ function renderTab(tab) {
       let tags = '';
       if (f.tags) { tags = '<div class="tags">' + f.tags.map(t => '<span class="tag '+t+'">' + ({hot:'🔥热门',rec:'👍推荐','new':'🆕新店'}[t]||'') + '</span>').join('') + '</div>'; }
       const img = f.img ? '<img src="'+f.img+'" class="food-card-img" alt="'+f.name+'" onerror="this.style.display=\'none\'">' : '<div class="food-card-img" style="display:flex;align-items:center;justify-content:center;font-size:40px;background:#f5f0e8">🍽️</div>';
-      body += '<div class="food-card">'+img+'<div class="food-card-body"><div class="food-card-top"><h4>'+f.name+'</h4><span class="price">'+f.price+'</span></div><div class="meta"><span class="rating">'+f.rating+'</span><span>'+f.type+'</span></div><div class="addr">📍 '+f.addr+'</div><div class="review">"'+f.review+'"</div>'+tags+'</div></div>';
+      body += '<div class="food-card">'+img+'<div class="food-card-body"><div class="food-card-top"><h4>'+f.name+'</h4><span class="price">'+f.price+'</span></div><div class="meta"><span class="rating">'+f.rating+'</span><span>'+f.type+'</span></div><div class="addr">📍 '+f.addr+'</div><div class="review">"'+f.review+'"</div>'+tags+'<a href="https://uri.amap.com/search?keyword='+encodeURIComponent(f.name)+'&city=厦门" target="_blank" class="nav-link" onclick="event.stopPropagation()">🗺️ 高德导航</a></div></div>';
     }
     body += '</div><div class="ai-disclaimer" style="margin-top:20px"><span class="ai-icon">🤖</span><span>图片为<strong>AI生成仅供参考</strong>，不是小七学姐实拍喔！千人千味，希望大家都能找到自己的梦中情饭！❤️</span></div>';
   } else if (tab === 'cafe') {
